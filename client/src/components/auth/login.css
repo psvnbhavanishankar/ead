@@ -1,0 +1,73 @@
+.login_bg {
+  position: relative;
+  background: url("https://i.ibb.co/ykGNRtb/Background-login-01.png") no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+.log_btn {
+  text-align: center;
+  border: none;
+  text-decoration: none;
+  height: 34px;
+  color: white;
+  background-color: black;
+  width: 23%;
+  margin-top: 20px;
+}
+.log_text {
+  border: none;
+  border-bottom: 1px solid #000000e0;
+  text-align: center;
+  width: 75%;
+  margin-bottom: 12%;
+  height: 51px;
+  text-decoration: none;
+  background-color: #fff0;
+}
+.log_link {
+  text-decoration: none;
+}
+
+.login_form_div {
+  text-align: center;
+  float: right;
+  position: absolute;
+
+  top: 23%;
+
+  left: 7%;
+  width: 24%;
+}
+
+.login_hr {
+  border-block-color: black;
+
+  border-width: 2px;
+  padding-top: 3%;
+  width: 25%;
+  padding-left: 2%;
+}
+
+.login_img {
+  float: right;
+  width: 50%;
+  text-align: center;
+  margin-top: 18%;
+
+  margin-right: 5%;
+}
+.login_gif {
+  alt: "hey-01";
+  border: "0";
+  width: 65%;
+}
+.login_intro {
+  text-align: center;
+  position: absolute;
+
+  top: 20%;
+
+  left: 59%;
+  font-family: Futura Md BT;
+  font-size: xx-large;
+}
