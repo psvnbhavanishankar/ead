@@ -1,0 +1,63 @@
+.editprotop {
+  background-color: #f3c51f;
+  font-family: futura Md BT;
+  font-size: xxx-large;
+  height: 40vh;
+  text-align: center;
+}
+.editprobot {
+  background-color: #eee6;
+  text-align: center;
+}
+.editproknife {
+  z-index: 1;
+  width: 20%;
+  position: absolute;
+  margin-top: -12%;
+  margin-left: 3%;
+}
+.editprotext {
+  font-family: karla;
+  font-size: larger;
+  padding-top: 3%;
+  text-align: left;
+}
+
+.editpro_bg {
+  position: relative;
+  background: url("https://i.ibb.co/ynJCRzW/Background-feed-01.png") no-repeat;
+  border: "0";
+  background-size: cover;
+}
+.editproinput {
+  border: none;
+  border-bottom: 1px solid #000000e0;
+  text-align: center;
+  width: 50%;
+  margin-bottom: 6%;
+  height: 51px;
+  text-decoration: none;
+  background-color: #fff0;
+}
+.editprorows {
+  margin-left: 10%;
+}
+.editprobtn {
+  text-align: center;
+  border: none;
+  text-decoration: none;
+  font-family: karla;
+  width: 23%;
+  color: black;
+  background-color: #f3c51f;
+  padding: 8px;
+  margin-top: 20px;
+}
+.editprobtn2 {
+  border: none;
+  text-decoration: none;
+  color: white;
+  background-color: black;
+  padding: 10px;
+  font-family: karla;
+}

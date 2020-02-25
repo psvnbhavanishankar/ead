@@ -5,7 +5,7 @@ import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
 import PropTypes from 'prop-types';
 import './register.css';
-import Navbar2 from '../layout/Navbar2';
+// import Navbar from '../layout/Navbar';
 
 const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
@@ -33,7 +33,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   }
   return (
     <Fragment>
-      <Navbar2 />
+      {/* <Navbar /> */}
       <div className='register_bg'>
         <div className='hey_there'>
           <img className='hey_pic' src='https://i.ibb.co/2YY9y4c/hey-01.png' />

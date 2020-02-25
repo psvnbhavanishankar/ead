@@ -1,24 +1,27 @@
 const mongoose = require('mongoose');
 
 const ClientProfileSchema = mongoose.Schema({
-    user:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'client'
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'client'
+  },
+  address: {
+    locality: {
+      type: String,
+      default: ''
     },
-    address:{
-        locality:{
-            type: String,
-            required: true
-        },
-        city:{
-            type: String,
-            required: true
-        },
-        pincode:{
-            type: Number,
-            default: 111111
-        }
+    city: {
+      type: String,
+      default: ''
+    },
+    pincode: {
+      type: Number,
+      default: 111111
     }
+  }
 });
 
-module.exports = ClientProfile = mongoose.model('clientprofile', ClientProfileSchema);
+module.exports = ClientProfile = mongoose.model(
+  'clientprofile',
+  ClientProfileSchema
+);

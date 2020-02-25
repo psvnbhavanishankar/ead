@@ -2,7 +2,11 @@ import axios from 'axios';
 import { setAlert } from './alert';
 import {
   REGISTER_SUCCESS,
+  REGISTER_LAWYER_SUCCESS,
   REGISTER_FAIL,
+  REGISTER_LAWYER_FAIL,
+  VERIFY_FAIL,
+  VERIFY_SUCCESS,
   USER_LOADED,
   AUTH_ERROR,
   LOGIN_SUCCESS,
@@ -61,6 +65,79 @@ export const register = ({ name, email, password }) => async dispatch => {
 
     dispatch({
       type: REGISTER_FAIL
+    });
+  }
+};
+
+//Register Lawyer
+
+export const lawyer_register = ({
+  name,
+  email,
+  password,
+  state,
+  enrollmentno
+}) => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+  console.log(name);
+  console.log(99);
+  const body = JSON.stringify({ name, email, password, state, enrollmentno });
+  console.log(body);
+
+  try {
+    const res = await axios.post('/api/users/lawyer', body, config);
+
+    dispatch({
+      type: REGISTER_LAWYER_SUCCESS,
+      payload: res.data
+    });
+
+    dispatch(loadUser());
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+    }
+
+    dispatch({
+      type: REGISTER_LAWYER_FAIL
+    });
+  }
+};
+
+//Verify Lawyer
+export const verify = ({ enrollmentno, name, state }) => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+
+  const body = JSON.stringify({ enrollmentno, name, state });
+
+  try {
+    const res = await axios.post('/api/users/check', body, config);
+
+    dispatch({
+      type: VERIFY_SUCCESS,
+      payload: res.data
+    });
+
+    // dispatch(loadUser());
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+    }
+
+    dispatch({
+      type: VERIFY_FAIL
     });
   }
 };

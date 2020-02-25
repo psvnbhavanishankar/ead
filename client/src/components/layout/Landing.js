@@ -15,6 +15,9 @@ const Landing = () => {
             <Link to='/register' className='btn btn-primary'>
               Sign Up
             </Link>
+            <Link to='/verify' className='btn btn-primary'>
+              Register as Lawyer
+            </Link>
             <Link to='/login' className='btn btn-light'>
               Login
             </Link>

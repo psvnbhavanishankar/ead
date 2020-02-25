@@ -6,7 +6,7 @@ const app = express();
 
 // Init Middleware
 
-app.use(express.json({extended:false}));
+app.use(express.json({ extended: false }));
 
 // const bodyParser = require('body-parser');
 // const { resolve } = require('path');
@@ -48,11 +48,15 @@ app.use('/api/users', require('./routes/api/users'));
 
 app.use('/api/profile', require('./routes/api/profile'));
 
+app.use('/api/profile_lawyer', require('./routes/api/profile_lawyer'));
+
 // app.use('/api/recipes', require('./routes/api/recipes'));
 
 app.use('/api/posts', require('./routes/api/posts'));
 
 app.use('/api/auth', require('./routes/api/auth'));
+
+app.use('/api/auth_lawyer', require('./routes/api/auth_lawyer'));
 
 // app.use('/api/ingredients', require('./routes/api/ingredients'));
 

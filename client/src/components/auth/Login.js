@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
 import './login.css';
-import Navbar2 from '../layout/Navbar2';
+// import Navbar2 from '../layout/Navbar2';
 
 const Login = ({ login, isAuthenticated }) => {
   const [formData, setFormData] = useState({
@@ -29,7 +29,7 @@ const Login = ({ login, isAuthenticated }) => {
 
   return (
     <Fragment>
-      <Navbar2 />
+      {/* <Navbar2 /> */}
       <div className='login_bg'>
         <div className='row'>
           <div className='col-lg-5'>login form</div>

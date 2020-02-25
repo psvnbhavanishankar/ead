@@ -1,27 +1,27 @@
-import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { logout } from "../../actions/auth";
-import "./navbar.css";
+import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { logout } from '../../actions/auth';
+import './navbar2.css';
 
 const Navbar2 = () => {
   const authLinks = (
     <Fragment>
       <div
-        className="navbar fixed-top navbar-expand-lg navbar-dark"
-        style={{ backgroundColor: "#000000" }}
+        className='navbar fixed-top navbar-expand-lg navbar-dark'
+        style={{ backgroundColor: '#000000' }}
       >
         <div
-          className="Dummynav-item nav-link active"
-          style={{ padding: "0px" }}
+          className='Dummynav-item nav-link active'
+          style={{ padding: '0px' }}
         >
-          <a href="/">
+          <a href='/'>
             <img
-              src="https://i.ibb.co/mvYK8k6/Nav-logo-01.png"
-              alt="Nav-logo-01"
-              border="0"
-              style={{ width: "22%" }}
+              src='https://i.ibb.co/mvYK8k6/Nav-logo-01.png'
+              alt='Nav-logo-01'
+              border='0'
+              style={{ width: '22%' }}
             />
           </a>
         </div>
@@ -31,16 +31,16 @@ const Navbar2 = () => {
 
   const guestLinks = (
     <div
-      className="navbar fixed-top navbar-expand-lg navbar-dark"
-      style={{ backgroundColor: "#000000" }}
+      className='navbar fixed-top navbar-expand-lg navbar-dark'
+      style={{ backgroundColor: '#000000' }}
     >
-      <div className="Dummynav-item nav-link active" style={{ padding: "0px" }}>
-        <a href="/">
+      <div className='Dummynav-item nav-link active' style={{ padding: '0px' }}>
+        <a href='/'>
           <img
-            src="https://i.ibb.co/mvYK8k6/Nav-logo-01.png"
-            alt="Nav-logo-01"
-            border="0"
-            style={{ width: "23%" }}
+            src='https://i.ibb.co/mvYK8k6/Nav-logo-01.png'
+            alt='Nav-logo-01'
+            border='0'
+            style={{ width: '23%' }}
           />
         </a>
       </div>

@@ -1,6 +1,8 @@
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
+  REGISTER_LAWYER_SUCCESS,
+  REGISTER_LAWYER_FAIL,
   USER_LOADED,
   AUTH_ERROR,
   LOGIN_SUCCESS,
@@ -28,6 +30,7 @@ export default function(state = initialState, action) {
         user: payload
       };
     case REGISTER_SUCCESS:
+    case REGISTER_LAWYER_SUCCESS:
     case LOGIN_SUCCESS:
       localStorage.setItem('token', payload.token);
       return {
@@ -36,8 +39,8 @@ export default function(state = initialState, action) {
         isAuthenticated: true,
         loading: false
       };
-
     case REGISTER_FAIL:
+    case REGISTER_LAWYER_FAIL:
     case AUTH_ERROR:
     case LOGIN_FAIL:
     case LOGOUT:

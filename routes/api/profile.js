@@ -11,7 +11,7 @@ router.get('/me', auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({
       user: req.user.id
-    }).populate('user', ['_id', 'address']);
+    }).populate('user', ['_id', 'name', 'avatar', 'email']);
     //const profile = await Profile.findOne({ user: req.user.id });
     if (!profile) {
       return res
@@ -54,28 +54,28 @@ router.get('/me', auth, async (req, res) => {
 // //@route POST api/profile
 // //@access private
 router.post(
-'/',
-[
-  auth,
-//   [
-//     check('skills', 'skills are required')
-//       .not()
-//       .isEmpty()
-//   ]
-],
+  '/',
+  [
+    auth
+    //   [
+    //     check('skills', 'skills are required')
+    //       .not()
+    //       .isEmpty()
+    //   ]
+  ],
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { locality,city,pincode } = req.body;
+    const { locality, city, pincode } = req.body;
     const profileFields = {};
     profileFields.user = req.user.id;
-    profileFields.address={
-        locality:locality,
-        city:city,
-        pincode:pincode
+    profileFields.address = {
+      locality: locality,
+      city: city,
+      pincode: pincode
     };
     try {
       let profile = await Profile.findOne({ user: req.user.id });
@@ -100,7 +100,7 @@ router.post(
 router.post('/update', auth, async (req, res) => {
   try {
     const update = {
-        address: {
+      address: {
         locality: req.body.locality,
         city: req.body.city,
         pincode: req.body.pincode
