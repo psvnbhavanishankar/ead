@@ -3,15 +3,15 @@ import { Redirect, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getFields, postFields } from '../../actions/fields';
-import { getLawyerbyField } from '../../actions/profile';
 import { setAlert } from '../../actions/alert';
 import { createMessage } from '../../actions/messages';
-import Navbar from '../layout/Navbar';
 import './options.css';
+// import Navbar from './Navbar';
 
-const Dashboard = ({
+const Fields = ({
   getFields,
-  getLawyerbyField,
+  postFields,
+  createMessage,
   auth,
   fields: { fields, post_fields },
   onSubmit
@@ -19,38 +19,74 @@ const Dashboard = ({
   useEffect(() => {
     getFields();
   }, []);
+  const selected_fields = {
+    user_id: auth.user,
+    selected: []
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+    postFields(selected_fields);
+    createMessage({
+      fieldsSelected: 'Your fields of experience have been noted!'
+    });
+    // return <Redirect to='/dashboard' />;
+  };
+
+  const onChange = function(id) {
+    if (fields && fields.fields) {
+      if (document.getElementById(id).checked === true) {
+        for (var i = 0; i < fields.fields.length; i++) {
+          if (fields.fields[i].name === id) {
+            if (!selected_fields.selected.includes(fields.fields[i].name)) {
+              selected_fields.selected.push(fields.fields[i].name);
+            }
+          }
+        }
+      } else if (document.getElementById(id).checked === false) {
+        for (i = 0; i < fields.fields.length; i++) {
+          if (fields.fields[i].name === id) {
+            if (selected_fields.selected.includes(fields.fields[i].name)) {
+              const index = selected_fields.selected.indexOf(
+                fields.fields[i].name
+              );
+              selected_fields.selected.splice(index);
+            }
+          }
+        }
+      }
+    }
+  };
+
+  if (post_fields) {
+    return <Redirect to='/lawyerdashboard' />;
+  }
 
   return (
     <Fragment>
-      <Navbar />
-      <br />
-      <br />
-      <br />
-      <br />
-      <div>Client Dashboard</div>
       {
         <Fragment>
           <div className='cuisine_bg' style={{ minHeight: '100vh' }}>
             <div class='row cuisinetoprow'>
               <div class='col-lg-4 cuisinelogo'>
-                {/* <img
+                <img
                   class='cuisinelogocont'
                   src='https://i.ibb.co/H7TfPXB/Logo-01.png'
-                /> */}
+                />
               </div>
 
               <div class='col-lg-4 cusinerow1col2'>
                 <span class='cuisineheadfutura'>
-                  Please select the field of the case
+                  Select your Fields of Experience
                 </span>
                 <hr class='cuisinehr1' />
               </div>
               {/* <div class='col-lg-4 cuisinenext'>
-              <Link className='nextattri' to='/lawyerdashboard'>
-                Next&nbsp;&nbsp;
-                <i class='fas fa-arrow-right' style={{ fontSize: '70%' }}></i>
-              </Link>
-            </div> */}
+                <Link className='nextattri' to='/lawyerdashboard'>
+                  Next&nbsp;&nbsp;
+                  <i class='fas fa-arrow-right' style={{ fontSize: '70%' }}></i>
+                </Link>
+              </div> */}
             </div>
             <br />
             <br />
@@ -80,29 +116,19 @@ const Dashboard = ({
                                 className='row'
                                 style={{ paddingTop: '10px' }}
                               >
-                                <div className='col-lg-12'>
-                                  <div class='cuisinekarla'>
-                                    <p
-                                      onClick={getLawyerbyField.bind(
-                                        this,
-                                        field.name
-                                      )}
-                                    >
-                                      {' '}
-                                      {field.name}{' '}
-                                    </p>
-                                  </div>
+                                <div className='col-lg-10'>
+                                  <div class='cuisinekarla'>{field.name}</div>
                                 </div>
-                                {/* <div className='col-lg-2'>
+                                <div className='col-lg-2'>
                                   <input
                                     id={field.name}
                                     name={field.name}
                                     type='checkbox'
                                     class='cuisineinput'
                                     value={field.name}
-                                    // onChange={onChange.bind(this, field.name)}
+                                    onChange={onChange.bind(this, field.name)}
                                   ></input>
-                                </div> */}
+                                </div>
                               </div>
                             </label>
                           </div>
@@ -113,9 +139,9 @@ const Dashboard = ({
                     <h4>No fields </h4>
                   )}
 
-                  {/* <button className='cuisinesavebtn' type='submit'>
+                  <button className='cuisinesavebtn' type='submit'>
                     Save
-                  </button> */}
+                  </button>
                 </div>
               </form>
             </div>
@@ -126,24 +152,22 @@ const Dashboard = ({
   );
 };
 
-Dashboard.propTypes = {
+Fields.propTypes = {
   getFields: PropTypes.func.isRequired,
   postFields: PropTypes.func.isRequired,
   createMessage: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired,
   fields: PropTypes.array.isRequired,
   post_fields: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  fields: state.fields,
-  profile: state.profile
+  fields: state.fields
 });
 
 export default connect(mapStateToProps, {
   getFields,
-  getLawyerbyField,
+  postFields,
   createMessage
-})(Dashboard);
+})(Fields);

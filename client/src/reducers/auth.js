@@ -14,6 +14,7 @@ import {
 const initialState = {
   token: localStorage.getItem('token'),
   isAuthenticated: null,
+  email_sent: null,
   loading: true,
   user: null
 };
@@ -31,6 +32,13 @@ export default function(state = initialState, action) {
       };
     case REGISTER_SUCCESS:
     case REGISTER_LAWYER_SUCCESS:
+      localStorage.setItem('token', payload.token);
+      return {
+        ...state,
+        ...payload,
+        email_sent: true,
+        loading: false
+      };
     case LOGIN_SUCCESS:
       localStorage.setItem('token', payload.token);
       return {

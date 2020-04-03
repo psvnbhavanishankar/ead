@@ -1,16 +1,17 @@
 import React, { useState, Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { editProfile, getCurrentProfile } from '../../actions/profile';
+import { editLawyerProfile, getLawyerProfile } from '../../actions/profile';
 import { Link, withRouter } from 'react-router-dom';
 import { deleteAccount } from '../../actions/profile';
 import Navbar from '../layout/Navbar';
 import './editprofile.css';
 
-const EditProfile = ({
-  profile: { profile, loading },
-  editProfile,
-  getCurrentProfile
+const EditLawyerProfile = ({
+  profile: { lawyerprofile, loading },
+  editLawyerProfile,
+  getLawyerProfile,
+  auth
 }) => {
   const [formData, setFormData] = useState({
     locality: '',
@@ -21,32 +22,48 @@ const EditProfile = ({
     // mobile: "",
     name: '',
     email: '',
-    avatar: ''
+    avatar: '',
+    enrollmentno: '',
+    state: ''
     // following: "",
     // followers: ""
   });
 
   useEffect(() => {
-    getCurrentProfile();
+    getLawyerProfile();
 
     setFormData({
       locality:
-        loading || !(profile.address && profile.address.locality)
+        loading || !(lawyerprofile.address && lawyerprofile.address.locality)
           ? ''
-          : profile.address.locality,
+          : lawyerprofile.address.locality,
       city:
-        loading || !(profile.address && profile.address.city)
+        loading || !(lawyerprofile.address && lawyerprofile.address.city)
           ? ''
-          : profile.address.city,
+          : lawyerprofile.address.city,
       pincode:
-        loading || !(profile.address && profile.address.pincode)
+        loading || !(lawyerprofile.address && lawyerprofile.address.pincode)
           ? ''
-          : profile.address.pincode,
-      // dob: loading || !profile.dob ? "" : profile.dob,
-      // mobile: loading || !profile.mobile ? "" : profile.mobile,
-      name: loading || !profile.user.name ? '' : profile.user.name,
-      email: loading || !profile.user.email ? '' : profile.user.email,
-      avatar: loading || !profile.user.avatar ? '' : profile.user.avatar
+          : lawyerprofile.address.pincode,
+      // dob: loading || !lawyerprofile.dob ? "" : lawyerprofile.dob,
+      // mobile: loading || !lawyerprofile.mobile ? "" : lawyerprofile.mobile,
+      name: loading || !lawyerprofile.user.name ? '' : lawyerprofile.user.name,
+      email:
+        loading || !lawyerprofile.user.email ? '' : lawyerprofile.user.email,
+      avatar:
+        loading || !lawyerprofile.user.avatar ? '' : lawyerprofile.user.avatar,
+      enrollmentno:
+        loading || !lawyerprofile.user.enrollmentno
+          ? ''
+          : lawyerprofile.user.enrollmentno,
+      state:
+        loading || !lawyerprofile.user.state ? '' : lawyerprofile.user.state,
+      licensed_year:
+        loading || !lawyerprofile.licensed_year
+          ? ''
+          : lawyerprofile.licensed_year,
+      experience:
+        loading || !lawyerprofile.experience ? '' : lawyerprofile.experience
     });
   }, [loading]);
 
@@ -59,7 +76,11 @@ const EditProfile = ({
     // mobile,
     name,
     email,
-    avatar
+    avatar,
+    enrollmentno,
+    state,
+    licensed_year,
+    experience
   } = formData;
 
   const onChange = e =>
@@ -67,7 +88,7 @@ const EditProfile = ({
 
   const onSubmit = e => {
     e.preventDefault();
-    editProfile(formData);
+    editLawyerProfile(formData);
   };
 
   return (
@@ -109,6 +130,32 @@ const EditProfile = ({
                       placeholder='email'
                       name='email'
                       value={email}
+                      onChange={e => onChange(e)}
+                    />
+                  </div>
+                </div>
+                <div className='row editprorows'>
+                  <div className='col-lg-3 editprotext'>Enrollment Number:</div>
+                  <div className='col-lg-9'>
+                    <input
+                      className='editproinput'
+                      type='text'
+                      placeholder='enrollmentno'
+                      name='enrollmentno'
+                      value={enrollmentno}
+                      onChange={e => onChange(e)}
+                    />
+                  </div>
+                </div>
+                <div className='row editprorows'>
+                  <div className='col-lg-3 editprotext'>State:</div>
+                  <div className='col-lg-9'>
+                    <input
+                      className='editproinput'
+                      type='text'
+                      placeholder='state'
+                      name='state'
+                      value={state}
                       onChange={e => onChange(e)}
                     />
                   </div>
@@ -190,6 +237,31 @@ const EditProfile = ({
                     </div>
                   </div>
                 </div>
+                <div className='row editprorows'>
+                  <div className='col-lg-3 editprotext'>Licensed Year:</div>
+                  <div className='col-lg-9'>
+                    <input
+                      className='editproinput'
+                      type='text'
+                      placeholder='Licensed Year'
+                      name='licensed_year'
+                      value={licensed_year}
+                      onChange={e => onChange(e)}
+                    />
+                  </div>
+                </div>
+                <div className='row editprorows'>
+                  <div className='col-lg-3 editprotext'>Experience:</div>
+                  <div className='col-lg-9'>
+                    <textarea
+                      rows={20}
+                      name='experience'
+                      className='editproinput'
+                      onChange={e => onChange(e)}
+                      value={experience}
+                    />
+                  </div>
+                </div>
                 <br />
                 <div>
                   <button className='editprobtn' type='submit'>
@@ -214,16 +286,18 @@ const EditProfile = ({
   );
 };
 
-EditProfile.propTypes = {
-  editProfile: PropTypes.func.isRequired,
-  getCurrentProfile: PropTypes.func.isRequired,
-  profile: PropTypes.object.isRequired
+EditLawyerProfile.propTypes = {
+  editLawyerProfile: PropTypes.func.isRequired,
+  getLawyerProfile: PropTypes.func.isRequired,
+  lawyerprofile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  profile: state.profile
+  profile: state.profile,
+  auth: state.auth
 });
 
-export default connect(mapStateToProps, { editProfile, getCurrentProfile })(
-  EditProfile
-);
+export default connect(mapStateToProps, {
+  editLawyerProfile,
+  getLawyerProfile
+})(EditLawyerProfile);

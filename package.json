@@ -14,12 +14,14 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "config": "^3.2.6",
+    "crypto": "^1.0.1",
     "csv-parser": "^2.3.2",
     "express": "^4.17.1",
     "express-validator": "^6.4.0",
     "gravatar": "^1.8.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.2",
+    "nodemailer": "^6.4.3",
     "request": "^2.88.2"
   },
   "devDependencies": {

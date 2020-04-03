@@ -1,6 +1,6 @@
 .login_bg {
   position: relative;
-  background: url("https://i.ibb.co/ykGNRtb/Background-login-01.png") no-repeat;
+  background: url('../../img/authpic.jpg') no-repeat;
   background-size: cover;
   height: 100vh;
 }
@@ -10,33 +10,38 @@
   text-decoration: none;
   height: 34px;
   color: white;
-  background-color: black;
-  width: 23%;
+  background-color: #c89a69;
+  width: 75%;
   margin-top: 20px;
 }
 .log_text {
   border: none;
-  border-bottom: 1px solid #000000e0;
+  border-bottom: 1px solid white;
   text-align: center;
   width: 75%;
-  margin-bottom: 12%;
+  margin-bottom: 7%;
   height: 51px;
   text-decoration: none;
   background-color: #fff0;
+  color: white;
 }
-.log_link {
+
+#log_link {
   text-decoration: none;
+  color: white;
 }
 
 .login_form_div {
   text-align: center;
-  float: right;
+  /* float: right; */
   position: absolute;
-
   top: 23%;
-
-  left: 7%;
-  width: 24%;
+  left: 30%;
+  width: 40%;
+  height: 70%;
+  background-color: #313131;
+  opacity: 0.9;
+  padding: 1%;
 }
 
 .login_hr {
@@ -57,8 +62,8 @@
   margin-right: 5%;
 }
 .login_gif {
-  alt: "hey-01";
-  border: "0";
+  alt: 'hey-01';
+  border: '0';
   width: 65%;
 }
 .login_intro {
@@ -70,4 +75,14 @@
   left: 59%;
   font-family: Futura Md BT;
   font-size: xx-large;
+}
+
+.futura {
+  font-family: 'Rokkitt';
+  color: white;
+  font-size: 3rem;
+}
+
+.futuraa {
+  color: #c89a69;
 }

@@ -58,6 +58,8 @@ app.use('/api/auth', require('./routes/api/auth'));
 
 app.use('/api/auth_lawyer', require('./routes/api/auth_lawyer'));
 
+app.use('/api/fields', require('./routes/api/fields'));
+
 // app.use('/api/ingredients', require('./routes/api/ingredients'));
 
 // app.use('/api/cuisine', require('./routes/api/cuisine'));

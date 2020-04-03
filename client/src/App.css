@@ -46,9 +46,10 @@ img {
 
 /* Text Styles*/
 .x-large {
-  font-size: 4rem;
+  font-size: 5rem;
   line-height: 1.2;
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
+  margin-top: 1.5em;
 }
 
 .large {
@@ -58,8 +59,28 @@ img {
 }
 
 .lead {
-  font-size: 1.5rem;
+  font-size: 3rem;
   margin-bottom: 1rem;
+}
+
+.firm1 {
+  color: #c89a69;
+}
+
+.title1 {
+  font-family: 'Rokkitt';
+  color: #353535;
+}
+
+.navtitles {
+  font-weight: bold;
+
+  margin-right: 5px;
+}
+
+.navtitles:hover {
+  text-decoration: none;
+  display: var(--dark-color);
 }
 
 .text-center {
@@ -128,8 +149,9 @@ img {
 
 .btn {
   display: inline-block;
-  background: var(--light-color);
-  color: #333;
+  background-color: #c89a69;
+  color: white;
+  font-weight: bold;
   padding: 0.4rem 1.3rem;
   font-size: 1rem;
   border: none;
@@ -137,6 +159,7 @@ img {
   margin-right: 0.5rem;
   transition: opacity 0.2s ease-in;
   outline: none;
+  border-radius: 0em;
 }
 
 .badge {
@@ -304,12 +327,13 @@ button {
   justify-content: space-between;
   align-items: center;
   padding: 0.7rem 2rem;
-  position: fixed;
+  position: absolute;
   z-index: 1;
   width: 100%;
   top: 0;
   border-bottom: solid 1px var(--primary-color);
   opacity: 0.9;
+  background-color: #c89a69;
 }
 
 .navbar ul {
@@ -341,12 +365,14 @@ button {
   color: #fff;
   height: 100%;
   width: 80%;
-  margin: auto;
+  /* margin: auto; */
+  margin-left: 20em;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+  font-family: 'Raleway';
 }
 
 /* Profiles Page */

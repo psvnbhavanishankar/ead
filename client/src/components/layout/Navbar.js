@@ -22,19 +22,29 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         <a href='#!'>Developers</a>
       </li> */}
       <li>
-        <Link to='/register'>Register</Link>
+        <Link to='/register' className='navtitles'>
+          REGISTER
+        </Link>
       </li>
       <li>
-        <Link to='/login'>Login</Link>
+        <Link to='/verify' className='navtitles'>
+          LAWYER-REG
+        </Link>
+      </li>
+      <li>
+        <Link to='/login' className='navtitles'>
+          LOGIN
+        </Link>
       </li>
     </ul>
   );
 
   return (
-    <nav className='navbar bg-dark'>
+    <nav className='navbar'>
       <h1>
         <Link to='/'>
-          <i className='fas fa-code'></i> DevConnector
+          <i class='fa fa-balance-scale' aria-hidden='true'></i>{' '}
+          <span className='title1'>DeJure</span>
         </Link>
       </h1>
       {!loading && (

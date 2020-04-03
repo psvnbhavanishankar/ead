@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { setAlert } from '../../actions/alert';
 import { lawyer_register } from '../../actions/auth';
+import { createMessage } from '../../actions/messages';
 import PropTypes from 'prop-types';
 import './register.css';
 // import Navbar from '../layout/Navbar';
@@ -20,7 +21,8 @@ export class Lawyer_Register extends Component {
   static propTypes = {
     setAlert: PropTypes.func.isRequired,
     lawyer_register: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool
+    isAuthenticated: PropTypes.bool,
+    createMessage: PropTypes.func.isRequired
   };
 
   onChange = e => this.setState({ [e.target.name]: e.target.value });
@@ -42,8 +44,12 @@ export class Lawyer_Register extends Component {
     let enrollmentno = this.props.verify.enrollmentno;
 
     if (password !== password2) {
-      this.props.setAlert('Passwords do not match', 'danger');
+      console.log(99);
+      this.props.createMessage({ passwordsNotMatch: 'Passwords do not match' });
     } else {
+      this.props.createMessage({
+        wait: 'You will be redirected. Please wait.'
+      });
       this.props.lawyer_register({
         name,
         email,
@@ -73,8 +79,8 @@ export class Lawyer_Register extends Component {
   //   password2
   // } = formData;
   render() {
-    if (this.props.auth && this.props.auth.isAuthenticated) {
-      return <Redirect to='/dashboard' />;
+    if (this.props.auth && this.props.auth.email_sent) {
+      return <Redirect to='/login' />;
     }
     const {
       enrollmentnumber,
@@ -88,30 +94,10 @@ export class Lawyer_Register extends Component {
     return (
       <Fragment>
         {/* <Navbar /> */}
-        <div className='register_bg'>
-          <div className='hey_there'>
-            <img
-              className='hey_pic'
-              src='https://i.ibb.co/2YY9y4c/hey-01.png'
-            />
-          </div>
-          <div className='intro karla'>
-            Lorem ipsum dolor sit amet,
-            <br />
-            consectetuer adipiscing elit, <br />
-            sed diam nonummy nibh eu
-            <br />
-            ismod tincidunt ma.
-            <br />
-            Already have an account?
-            <br />
-            <a classname='reg_link' href='/login'>
-              Login!
-            </a>
-          </div>
+        <div className='register_bg3'>
           <div className='reg_form_div'>
             <div>
-              <span className='futura'>Registration</span>
+              <span className='futura'>Lawyer Registration</span>
               <hr className='reg_hr' />
             </div>
             <br />
@@ -167,7 +153,16 @@ export class Lawyer_Register extends Component {
                   onChange={this.onChange}
                 />
                 <br />
-                <input className='reg_btn' type='submit' value='Register' />
+                <br />
+                <input className='reg_btn' type='submit' value='REGISTER' />
+
+                <br />
+                <br />
+                <a id='reg_link' href='/login'>
+                  LOGIN
+                </a>
+                <br />
+                <br />
               </form>
             </div>
           </div>
@@ -181,9 +176,13 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
   isVerified: state.verify.isVerified,
   auth: state.auth,
-  verify: state.verify
+  verify: state.verify,
+  createMessage: PropTypes.func.isRequired,
+  email_sent: PropTypes.bool
 });
 
-export default connect(mapStateToProps, { setAlert, lawyer_register })(
-  Lawyer_Register
-);
+export default connect(mapStateToProps, {
+  setAlert,
+  lawyer_register,
+  createMessage
+})(Lawyer_Register);

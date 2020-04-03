@@ -1,0 +1,169 @@
+.cuisine_bg {
+  background-color: #f4c613;
+}
+.rowtop {
+  background-color: white;
+  text-align: center;
+  margin: 0%;
+  height: 22%;
+}
+.nextattri {
+  text-decoration: none;
+  color: black;
+}
+a:hover {
+  color: black;
+  text-decoration: none;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+.small_logo {
+  alt: 'Logo-01';
+  border: '0';
+  width: 41%;
+}
+.cuisine_hr {
+  border-block-color: black;
+  border-width: 2px;
+  width: 40%;
+}
+.awesomearrow {
+  font-size: 70%;
+}
+.rowtopcol1 {
+  margin-top: 1%;
+  text-align: left;
+}
+.rowtopcol2 {
+  margin-top: 3%;
+}
+.rowtopcol3 {
+  font-family: Karla;
+  font-size: 24px;
+  margin-top: 4%;
+  padding-left: 14%;
+}
+.futura_span {
+  font-family: futura Md BT;
+  font-size: 24pt;
+}
+.row {
+  margin: 0%;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 57%;
+  width: 55%;
+  opacity: 0;
+  transition: 0.5s ease;
+  background-color: #000000;
+  margin: auto;
+  margin-top: 0%;
+}
+
+.recipe:hover .overlay {
+  opacity: 0.7;
+}
+
+.text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+#tick1 {
+  display: none;
+}
+.karla_span {
+  font-family: karla;
+  margin-top: 6%;
+  font-size: 20px;
+  margin-left: 3%;
+}
+
+.cuisinelogo {
+  margin-top: 1%;
+  text-align: left;
+}
+.cuisinetoprow {
+  background-color: white;
+  text-align: center;
+  margin: 0%;
+  height: 22%;
+}
+.cuisinelogocont {
+  width: 41%;
+}
+.cusinerow1col2 {
+  margin-top: 3%;
+}
+.cuisineheadfutura {
+  font-family: futura Md BT;
+  font-size: 24pt;
+}
+.cuisinehr1 {
+  border-block-color: black;
+  border-width: 2px;
+  width: 40%;
+}
+.cuisinenext {
+  font-family: Karla;
+  font-size: 24px;
+  margin-top: 4%;
+  padding-left: 14%;
+  padding-top: 1%;
+}
+.cuisinerow2col1cont {
+  background-color: white;
+  width: 75%;
+
+  height: 100%;
+  margin: auto;
+}
+.cuisineinput {
+  margin-top: 16px;
+}
+.cuisinesavebtn {
+  position: absolute;
+  top: 4%;
+  right: 8%;
+  color: white;
+  background-color: black;
+  border: none;
+  padding: 6px;
+  width: 70px;
+}
+.cuisineimg2 {
+  width: 145%;
+  margin-left: -20%;
+}
+.cuisinekarla {
+  font-family: karla;
+  margin-top: 6%;
+  font-size: 20px;
+  margin-left: 3%;
+}
+.cuisinerow2col2 {
+  background-color: white;
+  width: 50%;
+  height: 108%;
+  margin: auto;
+}
+.cuisineimg3 {
+  width: 145%;
+  margin-left: -20%;
+}

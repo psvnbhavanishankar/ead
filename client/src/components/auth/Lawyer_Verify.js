@@ -30,27 +30,12 @@ const Lawyer_Verify = ({ setAlert, verify, isVerified }) => {
   return (
     <Fragment>
       {/* <Navbar /> */}
-      <div className='register_bg'>
-        <div className='hey_there'>
-          <img className='hey_pic' src='https://i.ibb.co/2YY9y4c/hey-01.png' />
-        </div>
-        <div className='intro karla'>
-          Lorem ipsum dolor sit amet,
-          <br />
-          consectetuer adipiscing elit, <br />
-          sed diam nonummy nibh eu
-          <br />
-          ismod tincidunt ma.
-          <br />
-          Already have an account?
-          <br />
-          <a classname='reg_link' href='/login'>
-            Login!
-          </a>
-        </div>
+      <div className='register_bg2'>
         <div className='reg_form_div'>
           <div>
-            <span className='futura'>Lawyer Verification</span>
+            <span className='futura'>
+              Lawyer Verifi<span className='futuraa'>cation</span>
+            </span>
             <hr className='reg_hr' />
           </div>
           <br />
@@ -71,9 +56,11 @@ const Lawyer_Verify = ({ setAlert, verify, isVerified }) => {
                 name='enrollmentno'
                 value={enrollmentno}
                 onChange={e => onChange(e)}
-              />
+              />{' '}
+              <br />
               <select
                 className='form-control col-10'
+                id='optionclass'
                 name='state'
                 onChange={e => onChange(e)}
                 value={state}
@@ -89,8 +76,9 @@ const Lawyer_Verify = ({ setAlert, verify, isVerified }) => {
                 <option value='Uttarakhand'>Uttarakhand</option>
                 <option value='UttarPradesh'>Uttar Pradesh</option>
               </select>
-              <br />
+              <br /> <br />
               <input className='reg_btn' type='submit' value='Verify' />
+              <br /> <br />
             </form>
           </div>
         </div>

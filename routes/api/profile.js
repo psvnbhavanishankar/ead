@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
 const Profile = require('../../models/ClientProfile');
+const LawyerProfile = require('../../models/LawyerProfile');
 const User = require('../../models/Client');
 const { check, validationResult } = require('express-validator/check');
 
@@ -120,6 +121,42 @@ router.post('/update', auth, async (req, res) => {
     res.status(500).json({ msg: 'server error' });
   }
 });
+router.post('/lawyerupdate', auth, async (req, res) => {
+  try {
+    const update = {
+      address: {
+        locality: req.body.locality,
+        city: req.body.city,
+        pincode: req.body.pincode
+      },
+      licensed_year: req.body.licensed_year,
+      experience: req.body.experience
+    };
+    let profile = await LawyerProfile.findOneAndUpdate(
+      { user: req.user.id },
+      update,
+      {
+        new: true
+      }
+    );
+    await profile.save();
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ msg: 'server error' });
+  }
+});
+
+router.post('/field', async (req, res) => {
+  try {
+    let users = await LawyerProfile.find({ practice_areas: req.body.field });
+    console.log(users);
+    res.json(users);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ msg: 'server error' });
+  }
+});
 
 // router.post('/follow', auth, async (req, res) => {
 //   console.log(req.user);
@@ -195,6 +232,24 @@ router.get('/user/:user_id', async (req, res) => {
   }
 });
 
+router.get('/lawyer/me', auth, async (req, res) => {
+  try {
+    const profile = await LawyerProfile.findOne({
+      user: req.user.id
+    }).populate('user', ['_id', 'name', 'email', 'enrollmentno', 'state']);
+    if (!profile) {
+      res.status(400).json({ msg: 'profile not found' });
+    }
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind == 'ObjectId') {
+      res.status(400).json({ msg: 'profile not found' });
+    }
+    res.status(500).json({ msg: 'server error' });
+  }
+});
+
 // //@route GET all profiles api/profile
 // //@access public
 
@@ -223,6 +278,25 @@ router.delete('/', auth, async (req, res) => {
     await Profile.findOneAndRemove({ user: req.user.id });
     await User.findOneAndRemove({ _id: req.user.id });
     res.json({ msg: 'user deleted' });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ msg: 'server error' });
+  }
+});
+
+router.post('/fields', auth, async (req, res) => {
+  try {
+    console.log(req);
+    const update = {
+      practice_areas: req.body.fields
+    };
+    let profile = await LawyerProfile.findOneAndUpdate(
+      { user: req.user.id },
+      update,
+      { new: true }
+    );
+    await profile.save();
+    res.send('update success');
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ msg: 'server error' });

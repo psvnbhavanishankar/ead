@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { setAlert } from './alert';
+import { createMessage } from './messages';
 import {
   REGISTER_SUCCESS,
   REGISTER_LAWYER_SUCCESS,
@@ -48,19 +49,24 @@ export const register = ({ name, email, password }) => async dispatch => {
   const body = JSON.stringify({ name, email, password });
 
   try {
-    const res = await axios.post('/api/users', body, config);
+    const res = await axios.post('/api/users/sendmail', body, config);
 
     dispatch({
       type: REGISTER_SUCCESS,
       payload: res.data
     });
-
-    dispatch(loadUser());
+    // dispatch(loadUser());
   } catch (err) {
     const errors = err.response.data.errors;
 
     if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+      errors.forEach(error =>
+        dispatch(
+          createMessage({
+            login_error: error.msg
+          })
+        )
+      );
     }
 
     dispatch({
@@ -89,7 +95,7 @@ export const lawyer_register = ({
   console.log(body);
 
   try {
-    const res = await axios.post('/api/users/lawyer', body, config);
+    const res = await axios.post('/api/users/lawyer_sendmail', body, config);
 
     dispatch({
       type: REGISTER_LAWYER_SUCCESS,
@@ -101,7 +107,13 @@ export const lawyer_register = ({
     const errors = err.response.data.errors;
 
     if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+      errors.forEach(error =>
+        dispatch(
+          createMessage({
+            login_error: error.msg
+          })
+        )
+      );
     }
 
     dispatch({
@@ -133,7 +145,13 @@ export const verify = ({ enrollmentno, name, state }) => async dispatch => {
     const errors = err.response.data.errors;
 
     if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+      errors.forEach(error =>
+        dispatch(
+          createMessage({
+            login_error: error.msg
+          })
+        )
+      );
     }
 
     dispatch({
@@ -166,7 +184,13 @@ export const login = (email, password) => async dispatch => {
     const errors = err.response.data.errors;
 
     if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+      errors.forEach(error =>
+        dispatch(
+          createMessage({
+            login_error: error.msg
+          })
+        )
+      );
       console.log(errors);
     }
 

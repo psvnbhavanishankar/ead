@@ -1,6 +1,6 @@
-.navbar a {
-  color: white;
+.navbar:hover {
   text-decoration: none;
+  display: var(--dark-color);
 }
 .navbar {
   padding-bottom: 0px;

@@ -1,25 +1,31 @@
 .reg_text {
   border: none;
-  border-bottom: 1px solid #000000e0;
+  border-bottom: 1px solid white;
   text-align: center;
-  width: 55%;
+  width: 75%;
   height: 51px;
   margin-bottom: 8%;
   text-decoration: none;
   background-color: #fff0;
+  color: white;
+}
+
+#optionclass {
+  left: 12.2%;
+  width: 75%;
 }
 .reg_btn {
   text-align: center;
   text-decoration: none;
   height: 34px;
   color: white;
-  background-color: black;
-  width: 20%;
+  background-color: #c89a69;
+  width: 75%;
   border: none;
 }
 
 .reg_bg {
-  background: url("https://i.ibb.co/h14tdnV/Background-register-01.png")
+  background: url('https://i.ibb.co/h14tdnV/Background-register-01.png')
     no-repeat;
   background-size: cover;
 }
@@ -30,8 +36,8 @@
   padding-top: 3%;
 }
 .hey_pic {
-  alt: "hey-01";
-  border: "0";
+  alt: 'hey-01';
+  border: '0';
   width: 80%;
 }
 .intro {
@@ -44,12 +50,13 @@
 }
 .reg_form_div {
   text-align: center;
-  float: left;
   position: absolute;
-
-  top: 11%;
-
-  left: 62%;
+  top: 23%;
+  left: 30%;
+  width: 40%;
+  background-color: #313131;
+  opacity: 0.9;
+  padding: 1%;
 }
 .reg_hr {
   border-block-color: black;
@@ -57,13 +64,27 @@
   border-width: 2px;
 }
 
-.reg_link {
+#reg_link {
   text-decoration: none;
+  color: white;
 }
 .register_bg {
   position: relative;
-  background: url("https://i.ibb.co/h14tdnV/Background-register-01.png")
-    no-repeat;
+  background: url('../../img/authpic3.jpg') no-repeat;
+  background-size: cover;
+  height: 130vh;
+}
+
+.register_bg2 {
+  position: relative;
+  background: url('../../img/authpic4.jpg') no-repeat;
   background-size: cover;
   height: 100vh;
+}
+
+.register_bg3 {
+  position: relative;
+  background: url('../../img/authpic5.jpg') no-repeat;
+  background-size: cover;
+  height: 160vh;
 }

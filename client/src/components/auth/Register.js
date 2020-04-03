@@ -3,11 +3,18 @@ import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
+import { createMessage } from '../../actions/messages';
 import PropTypes from 'prop-types';
 import './register.css';
-// import Navbar from '../layout/Navbar';
+import Navbar from '../layout/Navbar';
 
-const Register = ({ setAlert, register, isAuthenticated }) => {
+const Register = ({
+  setAlert,
+  register,
+  isAuthenticated,
+  email_sent,
+  createMessage
+}) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -22,42 +29,29 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   const onSubmit = async e => {
     e.preventDefault();
     if (password !== password2) {
-      setAlert('Passwords do not match', 'danger');
+      createMessage({ passwordsNotMatch: 'Passwords do not match' });
     } else {
+      createMessage({
+        wait: 'You will be redirected. Please wait.'
+      });
       register({ name, email, password });
     }
   };
 
-  if (isAuthenticated) {
-    return <Redirect to='/dashboard' />;
+  if (email_sent) {
+    return <Redirect to='/login' />;
   }
   return (
     <Fragment>
       {/* <Navbar /> */}
       <div className='register_bg'>
-        <div className='hey_there'>
-          <img className='hey_pic' src='https://i.ibb.co/2YY9y4c/hey-01.png' />
-        </div>
-        <div className='intro karla'>
-          Lorem ipsum dolor sit amet,
-          <br />
-          consectetuer adipiscing elit, <br />
-          sed diam nonummy nibh eu
-          <br />
-          ismod tincidunt ma.
-          <br />
-          Already have an account?
-          <br />
-          <a classname='reg_link' href='/login'>
-            Login!
-          </a>
-        </div>
         <div className='reg_form_div'>
           <div>
-            <span className='futura'>Registration</span>
+            <span className='futura'>
+              <span className='futuraa'>Reg</span>istration
+            </span>
             <hr className='reg_hr' />
           </div>
-          <br />
           <div>
             <form onSubmit={e => onSubmit(e)}>
               <input
@@ -84,7 +78,6 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 value={password}
                 onChange={e => onChange(e)}
               />
-
               <input
                 type='password'
                 className='reg_text'
@@ -94,7 +87,16 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 onChange={e => onChange(e)}
               />
               <br />
-              <input className='reg_btn' type='submit' value='Register' />
+              <br />
+              <input className='reg_btn' type='submit' value='REGISTER' />{' '}
+              <br />
+              <br />
+              <br />
+              <a id='reg_link' href='/login'>
+                LOGIN
+              </a>
+              <br />
+              <br />
             </form>
           </div>
         </div>
@@ -106,11 +108,16 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool
+  isAuthenticated: PropTypes.bool,
+  email_sent: PropTypes.bool,
+  createMessage: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  email_sent: state.auth.email_sent
 });
 
-export default connect(mapStateToProps, { setAlert, register })(Register);
+export default connect(mapStateToProps, { setAlert, register, createMessage })(
+  Register
+);
