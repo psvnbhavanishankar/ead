@@ -50,7 +50,7 @@ const Login = ({
     <Fragment>
       {/* <Navbar /> */}
       <div className='login_bg'>
-        <div className='login_form_div'>
+        <div className='login_form_div1'>
           <div>
             <span className='futura'>
               Log<span className='futuraa'>in</span>

@@ -52,7 +52,13 @@ app.use('/api/profile_lawyer', require('./routes/api/profile_lawyer'));
 
 // app.use('/api/recipes', require('./routes/api/recipes'));
 
+app.use('/api/cases', require('./routes/api/cases'));
+
 app.use('/api/posts', require('./routes/api/posts'));
+
+app.use('/api/blogs', require('./routes/api/blogs'));
+
+app.use('/api/comments', require('./routes/api/comments'));
 
 app.use('/api/auth', require('./routes/api/auth'));
 

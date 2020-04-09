@@ -1,0 +1,68 @@
+.back1 {
+  position: relative;
+  background: url('../../img/post.jpg') no-repeat;
+  background-size: cover;
+  height: 150vh;
+}
+.container2 {
+  text-align: center;
+  /* float: right; */
+  position: absolute;
+  /* top: 10%; */
+  left: 20%;
+  width: 55%;
+  height: 90%;
+}
+
+.card3 {
+  text-align: left;
+  /* float: right; */
+  position: relative;
+  top: 15%;
+  left: 15%;
+  color: white;
+  width: 90%;
+  height: 70%;
+  background-color: #313131;
+  opacity: 0.9;
+  padding: 1%;
+  /* display: inline-block; */
+}
+
+.ak111 {
+  text-align: center;
+}
+.pas {
+  text-align: center;
+  /* float: right; */
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 90%;
+}
+.pk {
+  text-align: center;
+  border: none;
+  text-decoration: none;
+  height: 50px;
+  color: white;
+  background-color: #c89a69;
+  width: 15%;
+  margin-top: 20px;
+}
+.pk1 {
+  background-color: #c89a69;
+  height: 30px;
+}
+
+.log_btn7 {
+  text-align: center;
+  border: none;
+  text-decoration: none;
+  height: 34px;
+  color: white;
+  background-color: #c89a69;
+  width: 75%;
+  margin-top: 20px;
+}

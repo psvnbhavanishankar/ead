@@ -1,5 +1,15 @@
-.cuisine_bg {
-  background-color: #f4c613;
+.cuisine_bg1 {
+  position: relative;
+  background: url('../../img/dashboard.jpg') no-repeat;
+  
+  
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: 5000px 1500px;
+  height: 1100px;
+  
+  
 }
 .rowtop {
   background-color: white;
@@ -16,11 +26,40 @@ a:hover {
   text-decoration: none;
 }
 
+.cuisinerow2col1cont1 {
+  
+  background-color:white;
+  width:100%;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 5px;
+  height: 100%;
+  margin: auto;
+}
+.cuisinerow2col1cont1:hover {
+  transition: 0.2s;
+  box-shadow: 5px 5px 5px black;;
+  border: 1px solid black;
+
+}
 a {
   color: black;
   text-decoration: none;
 }
 
+.ak {
+  text-align: center;
+  /* float: right; */
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  
+  width:60%;
+  height: 120%;
+  background-color: #f5d6c6;
+  opacity: 0.9;
+  
+}
 .small_logo {
   alt: 'Logo-01';
   border: '0';
@@ -111,10 +150,16 @@ a {
 .cusinerow1col2 {
   margin-top: 3%;
 }
-.cuisineheadfutura {
-  font-family: futura Md BT;
-  font-size: 24pt;
+.cuisineheadfutura1 {
+  padding: 1px;
+  text-align: center;
+  font-family: 'Rokkitt';
+  font-size: 3rem;
 }
+.futuraa {
+  color: #c89a69;
+}
+
 .cuisinehr1 {
   border-block-color: black;
   border-width: 2px;

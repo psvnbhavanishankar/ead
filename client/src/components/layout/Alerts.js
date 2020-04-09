@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 export class Alerts extends Component {
   static propTypes = {
     error: PropTypes.object.isRequired,
-    message: PropTypes.object.isRequired
+    message: PropTypes.object.isRequired,
   };
 
   componentDidUpdate(prevProps) {
@@ -66,6 +66,9 @@ export class Alerts extends Component {
       if (message.payment) {
         alert.success(message.payment);
       }
+      if (message.payment_cancelled) {
+        alert.error(message.payment_cancelled);
+      }
       if (message.cannotfollow) {
         alert.info(message.cannotfollow);
       }
@@ -83,9 +86,9 @@ export class Alerts extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   error: state.errors,
-  message: state.messages
+  message: state.messages,
 });
 
 export default connect(mapStateToProps)(withAlert()(Alerts));

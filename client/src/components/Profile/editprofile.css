@@ -1,14 +1,52 @@
 .editprotop {
-  background-color: #f3c51f;
-  font-family: futura Md BT;
+  position: relative;
+
+  font-family: Rokkitt;
   font-size: xxx-large;
-  height: 40vh;
+
   text-align: center;
 }
-.editprobot {
-  background-color: #eee6;
-  text-align: center;
+.login_bg2 {
+  position: relative;
+  background: url('../../img/profile.jpg') no-repeat;
+  background-size: cover;
+  height: 160vh;
 }
+.cab {
+  /* position: relative; */
+  background-image: url('../../img/sky.jpg');
+  background-repeat: repeat-y;
+
+  /* height: 120vh;
+  font-family: Rokkitt;
+  font-size: xxx-large;
+
+  text-align: center; */
+}
+.login_form_div2 {
+  text-align: center;
+  /* float: right; */
+  position: absolute;
+  top: 15%;
+  left: 30%;
+  width: 40%;
+  height: 80%;
+  background-color: #313131;
+  opacity: 0.9;
+  padding: 1%;
+}
+
+/* .editprobot {
+  text-align: center;
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  width: 40%;
+  height: 87%;
+  background-color: #f5d6c6;
+  opacity: 0.9;
+  padding: 1%;
+} */
 .editproknife {
   z-index: 1;
   width: 20%;
@@ -20,36 +58,37 @@
   font-family: karla;
   font-size: larger;
   padding-top: 3%;
+  padding-left: 15%;
   text-align: left;
+  color: white;
 }
 
 .editpro_bg {
-  position: relative;
-  background: url("https://i.ibb.co/ynJCRzW/Background-feed-01.png") no-repeat;
-  border: "0";
-  background-size: cover;
+  border: '0';
 }
 .editproinput {
   border: none;
   border-bottom: 1px solid #000000e0;
   text-align: center;
-  width: 50%;
+  width: 60%;
   margin-bottom: 6%;
   height: 51px;
   text-decoration: none;
   background-color: #fff0;
+  color: white;
 }
 .editprorows {
   margin-left: 10%;
+  color: white;
 }
 .editprobtn {
   text-align: center;
   border: none;
   text-decoration: none;
-  font-family: karla;
+  font-family: inherit;
   width: 23%;
-  color: black;
-  background-color: #f3c51f;
+  color: white;
+  background-color: black;
   padding: 8px;
   margin-top: 20px;
 }
@@ -59,5 +98,74 @@
   color: white;
   background-color: black;
   padding: 10px;
-  font-family: karla;
+  font-family: inherit;
+}
+
+.pd {
+  text-align: center;
+}
+.sd {
+  text-align: center;
+  background-color: #c89a69;
+}
+.card6 {
+  text-align: left;
+  /* float: right; */
+  position: relative;
+  top: 15%;
+  left: 35%;
+  color: white;
+  width: 30%;
+  height: 60%;
+  background-color: #313131;
+  opacity: 0.9;
+  padding: 1%;
+  /* display: inline-block; */
+}
+
+.ga {
+  font-family: Arial;
+  font-weight: bold;
+
+  display: table; /* keep the background color wrapped tight */
+  margin: 0px auto 0px auto; /* keep the table centered */
+  padding: 5px;
+  background-color: black;
+  color: white;
+  font-size: 20px;
+}
+/* #38a1f3 */
+
+.myrectop_cont {
+  padding: 25px;
+}
+
+.jas2 {
+  text-align: left;
+  color: white;
+  font-family: Raleway, sans-serif;
+}
+.cuisinekarla {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.futura {
+  font-family: 'Rokkitt';
+  color: white;
+  font-size: 3rem;
+}
+
+.futuraa {
+  color: #c89a69;
+}
+
+.log_btn {
+  text-align: center;
+  border: none;
+  text-decoration: none;
+  height: 34px;
+  color: white;
+  background-color: #c89a69;
+  width: 75%;
+  margin-top: 20px;
 }

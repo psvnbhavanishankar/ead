@@ -8,10 +8,89 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
     <ul>
       <li>
-        <a onClick={logout} href='/login'>
-          <i className='fas fa-sign-out-alt'></i>{' '}
-          <span className='hide-sm'>Logout</span>
-        </a>
+        <div className='dropdown'>
+          <button
+            class='btn dropdown-toggle'
+            type='button'
+            id='dropdownMenuButton'
+            data-toggle='dropdown'
+          >
+            Discussion Forum
+          </button>
+          <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
+            <a class='dropdown-item'>
+              <Link
+                to='/posts'
+                style={{
+                  color: 'inherit',
+                  textDecoration: 'inherit',
+                  fontWeight: 'bold',
+                }}
+              >
+                Posts
+              </Link>
+            </a>
+            <a class='dropdown-item'>
+              <Link
+                to='/upload_post'
+                style={{
+                  color: 'inherit',
+                  textDecoration: 'inherit',
+                  fontWeight: 'bold',
+                }}
+              >
+                Upload a Post
+              </Link>
+            </a>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button class='btn '>
+          <Link
+            to='/dashboard'
+            className='navtitles'
+            style={{
+              color: 'inherit',
+              textDecoration: 'inherit',
+              fontWeight: 'bold',
+            }}
+          >
+            Dashboard
+          </Link>
+        </button>
+      </li>
+
+      <li>
+        <button class='btn '>
+          <Link
+            to='/clientprofile'
+            className='navtitles'
+            style={{
+              color: 'inherit',
+              textDecoration: 'inherit',
+              fontWeight: 'bold',
+            }}
+          >
+            Client Profile
+          </Link>
+        </button>
+      </li>
+      <li>
+        <button class='btn '>
+          <a
+            onClick={logout}
+            href='/login'
+            style={{
+              color: 'inherit',
+              textDecoration: 'inherit',
+              fontWeight: 'bold',
+            }}
+          >
+            <i className='fas fa-sign-out-alt'></i>{' '}
+            <span className='hide-sm'>Logout</span>
+          </a>
+        </button>
       </li>
     </ul>
   );
@@ -56,11 +135,11 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
 Navbar.propTypes = {
   logout: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-  auth: state.auth
+const mapStateToProps = (state) => ({
+  auth: state.auth,
 });
 
 export default connect(mapStateToProps, { logout })(Navbar);

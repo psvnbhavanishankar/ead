@@ -11,7 +11,7 @@ const { check, validationResult } = require('express-validator/check');
 router.get('/me', auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({
-      user: req.user.id
+      user: req.user.id,
     }).populate('user', ['_id', 'name', 'avatar', 'email']);
     //const profile = await Profile.findOne({ user: req.user.id });
     if (!profile) {
@@ -57,7 +57,7 @@ router.get('/me', auth, async (req, res) => {
 router.post(
   '/',
   [
-    auth
+    auth,
     //   [
     //     check('skills', 'skills are required')
     //       .not()
@@ -76,7 +76,7 @@ router.post(
     profileFields.address = {
       locality: locality,
       city: city,
-      pincode: pincode
+      pincode: pincode,
     };
     try {
       let profile = await Profile.findOne({ user: req.user.id });
@@ -104,14 +104,14 @@ router.post('/update', auth, async (req, res) => {
       address: {
         locality: req.body.locality,
         city: req.body.city,
-        pincode: req.body.pincode
-      }
+        pincode: req.body.pincode,
+      },
     };
     let profile = await Profile.findOneAndUpdate(
       { user: req.user.id },
       update,
       {
-        new: true
+        new: true,
       }
     );
     await profile.save();
@@ -127,16 +127,17 @@ router.post('/lawyerupdate', auth, async (req, res) => {
       address: {
         locality: req.body.locality,
         city: req.body.city,
-        pincode: req.body.pincode
+        pincode: req.body.pincode,
       },
       licensed_year: req.body.licensed_year,
-      experience: req.body.experience
+      experience: req.body.experience,
+      price: req.body.price,
     };
     let profile = await LawyerProfile.findOneAndUpdate(
       { user: req.user.id },
       update,
       {
-        new: true
+        new: true,
       }
     );
     await profile.save();
@@ -149,7 +150,9 @@ router.post('/lawyerupdate', auth, async (req, res) => {
 
 router.post('/field', async (req, res) => {
   try {
-    let users = await LawyerProfile.find({ practice_areas: req.body.field });
+    let users = await LawyerProfile.find({
+      practice_areas: req.body.field,
+    }).populate('user', ['_id', 'name', 'avatar', 'email']);
     console.log(users);
     res.json(users);
   } catch (err) {
@@ -217,7 +220,7 @@ router.post('/field', async (req, res) => {
 router.get('/user/:user_id', async (req, res) => {
   try {
     const profile = await Profile.findOne({
-      user: req.params.user_id
+      user: req.params.user_id,
     }).populate('user', ['_id', 'name', 'email']);
     if (!profile) {
       res.status(400).json({ msg: 'profile not found' });
@@ -235,7 +238,25 @@ router.get('/user/:user_id', async (req, res) => {
 router.get('/lawyer/me', auth, async (req, res) => {
   try {
     const profile = await LawyerProfile.findOne({
-      user: req.user.id
+      user: req.user.id,
+    }).populate('user', ['_id', 'name', 'email', 'enrollmentno', 'state']);
+    if (!profile) {
+      res.status(400).json({ msg: 'profile not found' });
+    }
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind == 'ObjectId') {
+      res.status(400).json({ msg: 'profile not found' });
+    }
+    res.status(500).json({ msg: 'server error' });
+  }
+});
+
+router.get('/lawyer/:lawyer_id', auth, async (req, res) => {
+  try {
+    const profile = await LawyerProfile.findOne({
+      user: req.params.lawyer_id,
     }).populate('user', ['_id', 'name', 'email', 'enrollmentno', 'state']);
     if (!profile) {
       res.status(400).json({ msg: 'profile not found' });
@@ -261,7 +282,7 @@ router.get('/', async (req, res) => {
       'email',
       'locality',
       'city',
-      'pincode'
+      'pincode',
     ]);
     res.json(profiles);
   } catch (err) {
@@ -288,7 +309,7 @@ router.post('/fields', auth, async (req, res) => {
   try {
     console.log(req);
     const update = {
-      practice_areas: req.body.fields
+      practice_areas: req.body.fields,
     };
     let profile = await LawyerProfile.findOneAndUpdate(
       { user: req.user.id },

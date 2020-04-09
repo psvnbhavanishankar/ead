@@ -8,59 +8,59 @@ import { setAlert } from '../../actions/alert';
 import { createMessage } from '../../actions/messages';
 import Navbar from '../layout/Navbar';
 import './options.css';
+import personalinjury from '../../img/practice-3.jpg';
+import familylaw from '../../img/practice-4.jpg';
+import employmentlaw from '../../img/practice-6.jpg';
+import bankandfinancial from '../../img/practice-2.jpg';
+import capitalmarket from '../../img/practice-5.jpg';
+import accidents from '../../img/practice-1.jpg';
+import disputeresolution from '../../img/practice-8.jpg';
+import corporate from '../../img/practice-7.jpg';
 
 const Dashboard = ({
   getFields,
   getLawyerbyField,
   auth,
   fields: { fields, post_fields },
-  onSubmit
+  onSubmit,
 }) => {
   useEffect(() => {
     getFields();
   }, []);
 
+  var count = 0;
+
+  var array = [
+    personalinjury,
+    familylaw,
+    employmentlaw,
+    bankandfinancial,
+    capitalmarket,
+    accidents,
+    disputeresolution,
+    corporate,
+  ];
+
   return (
     <Fragment>
       <Navbar />
-      <br />
-      <br />
-      <br />
-      <br />
-      <div>Client Dashboard</div>
       {
         <Fragment>
-          <div className='cuisine_bg' style={{ minHeight: '100vh' }}>
-            <div class='row cuisinetoprow'>
-              <div class='col-lg-4 cuisinelogo'>
-                {/* <img
-                  class='cuisinelogocont'
-                  src='https://i.ibb.co/H7TfPXB/Logo-01.png'
-                /> */}
-              </div>
+          <div className='cuisine_bg1'></div>
 
-              <div class='col-lg-4 cusinerow1col2'>
-                <span class='cuisineheadfutura'>
-                  Please select the field of the case
+          <div className='ak'>
+            <div className='container'>
+              <div>
+                <span class='cuisineheadfutura1'>
+                  Select the
+                  <span class='futuraa'> field </span>of the case
                 </span>
                 <hr class='cuisinehr1' />
               </div>
-              {/* <div class='col-lg-4 cuisinenext'>
-              <Link className='nextattri' to='/lawyerdashboard'>
-                Next&nbsp;&nbsp;
-                <i class='fas fa-arrow-right' style={{ fontSize: '70%' }}></i>
-              </Link>
-            </div> */}
-            </div>
-            <br />
-            <br />
-            <br />
-            <br />
-            <div className='container'>
               <form onSubmit={onSubmit}>
                 <div class='row'>
                   {fields && fields.fields ? (
-                    fields.fields.map(field => (
+                    fields.fields.map((field) => (
                       <div
                         className='col-lg-3'
                         style={{ paddingBottom: '70px' }}
@@ -73,7 +73,7 @@ const Dashboard = ({
                           >
                             <img
                               style={{ width: '120%' }}
-                              src='https://i.ibb.co/jg42fmy/28-KITCHEN1-article-Large.jpg'
+                              src={array[count++]}
                             />
                             <label style={{ width: '93%' }}>
                               <div
@@ -89,7 +89,16 @@ const Dashboard = ({
                                       )}
                                     >
                                       {' '}
-                                      {field.name}{' '}
+                                      <Link
+                                        to={`/profile_by_field/${field.name}`}
+                                        style={{
+                                          color: 'inherit',
+                                          textDecoration: 'inherit',
+                                          fontWeight: 'bold',
+                                        }}
+                                      >
+                                        {field.name}{' '}
+                                      </Link>
                                     </p>
                                   </div>
                                 </div>
@@ -133,17 +142,17 @@ Dashboard.propTypes = {
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
   fields: PropTypes.array.isRequired,
-  post_fields: PropTypes.bool
+  post_fields: PropTypes.bool,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
   fields: state.fields,
-  profile: state.profile
+  profile: state.profile,
 });
 
 export default connect(mapStateToProps, {
   getFields,
   getLawyerbyField,
-  createMessage
+  createMessage,
 })(Dashboard);

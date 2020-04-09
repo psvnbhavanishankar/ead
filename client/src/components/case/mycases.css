@@ -1,0 +1,38 @@
+.cab1 {
+  position: relative;
+  background-image: url('../../img/authpic.jpg');
+  background-repeat: repeat-y;
+
+  /* height: 120vh; */
+  /* font-family: Rokkitt; */
+  /* font-size: xxx-large; */
+
+  /* text-align: center; */
+}
+
+.awm {
+  text-align: left;
+  /* float: right; */
+  position: absolute;
+  top: 15%;
+  left: 35%;
+  color: white;
+
+  background-color: #313131;
+  opacity: 0.9;
+  padding: 4%;
+}
+
+.op {
+  color: white;
+}
+
+.jas {
+  text-align: left;
+  font-weight: bold;
+  color: black;
+}
+
+.dos {
+  padding: 10px;
+}

@@ -6,6 +6,11 @@ import profile from './profile';
 import messages from './messages';
 import errors from './errors';
 import fields from './fields';
+import cases from './cases';
+import Blog from './Blog';
+import allblogs from './allblogs';
+import posts from './posts';
+import comments from './comments';
 
 export default combineReducers({
   alert,
@@ -14,5 +19,10 @@ export default combineReducers({
   verify,
   messages,
   errors,
-  fields
+  fields,
+  cases,
+  Blog,
+  allblogs,
+  posts,
+  comments,
 });

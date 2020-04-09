@@ -3,36 +3,40 @@ const mongoose = require('mongoose');
 const LawyerProfileSchema = mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'lawyer'
+    ref: 'lawyer',
   },
 
   address: {
     locality: {
-      type: String
+      type: String,
     },
     city: {
-      type: String
+      type: String,
     },
     pincode: {
-      type: Number
-    }
+      type: Number,
+    },
   },
 
   experience: [
     {
-      type: String
-    }
+      type: String,
+    },
   ],
 
   practice_areas: [
     {
-      type: String
-    }
+      type: String,
+    },
   ],
 
   licensed_year: {
-    type: Number
-  }
+    type: Number,
+  },
+
+  price: {
+    type: Number,
+  },
 });
 
 module.exports = LawyerProfile = mongoose.model(

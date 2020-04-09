@@ -15,10 +15,20 @@ import Lawyer_Verify from './components/auth/Lawyer_Verify';
 import Lawyer_Register from './components/auth/Lawyer_Register';
 import ClientProfile from './components/Profile/EditProfile';
 import LawyerProfile from './components/Profile/EditLawyerProfile';
+import LawyerProfilesByField from './components/Profile/LawyerProfilesByField';
 import Fields from './components/fields/fields';
+import PaymentPortal from './components/payments/PaymentPortal';
 import Oauth from './components/auth/test_oauth';
 import Alerts from './components/layout/Alerts';
-// import myProfile from './components/Profile/myProfile';
+import Mycases from './components/case/Mycases';
+import Posts from './components/DiscussionForum/posts';
+import Comments from './components/DiscussionForum/comments';
+import UploadPost from './components/DiscussionForum/UploadPost';
+import UploadComment from './components/DiscussionForum/UploadComment';
+import AllBlogs from './components/AllBlogs/allblogs';
+import Blog_Dashboard from './components/Blog/Blog_Dashboard';
+import Blog from './components/Blog/Blog';
+
 //Redux
 import { Provider } from 'react-redux';
 import store from './store';
@@ -34,7 +44,7 @@ if (localStorage.token) {
 
 const alertOptions = {
   timeout: 7000,
-  position: 'bottom right'
+  position: 'bottom right',
 };
 
 const App = () => {
@@ -65,6 +75,22 @@ const App = () => {
               <Route exact path='/fields' component={Fields} />
               <Route exact path='/dashboard2' component={Dashboard2} />
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
+              <PrivateRoute exact path='/mycases' component={Mycases} />
+              <PrivateRoute exact path='/allblogs' component={AllBlogs} />
+              <PrivateRoute exact path='/myblogs' component={Blog} />
+              <PrivateRoute exact path='/posts' component={Posts} />
+              <PrivateRoute exact path='/post' component={Comments} />
+              <PrivateRoute exact path='/upload_post' component={UploadPost} />
+              <PrivateRoute
+                exact
+                path='/upload_comment'
+                component={UploadComment}
+              />
+              <PrivateRoute
+                exact
+                path='/profile_by_field/:field'
+                component={LawyerProfilesByField}
+              />
               <PrivateRoute
                 exact
                 path='/lawyerdashboard'
@@ -80,7 +106,8 @@ const App = () => {
                 path='/lawyerprofile'
                 component={LawyerProfile}
               />
-              {/* <PrivateRoute exact path='/myprofile' component={myProfile} /> */}
+              <PrivateRoute exact path='/bloglist' component={Blog_Dashboard} />
+              <PrivateRoute exact path='/pay' component={PaymentPortal} />
             </Switch>
           </Fragment>
         </Router>

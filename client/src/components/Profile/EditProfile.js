@@ -10,7 +10,7 @@ import './editprofile.css';
 const EditProfile = ({
   profile: { profile, loading },
   editProfile,
-  getCurrentProfile
+  getCurrentProfile,
 }) => {
   const [formData, setFormData] = useState({
     locality: '',
@@ -21,7 +21,7 @@ const EditProfile = ({
     // mobile: "",
     name: '',
     email: '',
-    avatar: ''
+    avatar: '',
     // following: "",
     // followers: ""
   });
@@ -46,7 +46,7 @@ const EditProfile = ({
       // mobile: loading || !profile.mobile ? "" : profile.mobile,
       name: loading || !profile.user.name ? '' : profile.user.name,
       email: loading || !profile.user.email ? '' : profile.user.email,
-      avatar: loading || !profile.user.avatar ? '' : profile.user.avatar
+      avatar: loading || !profile.user.avatar ? '' : profile.user.avatar,
     });
   }, [loading]);
 
@@ -59,13 +59,13 @@ const EditProfile = ({
     // mobile,
     name,
     email,
-    avatar
+    avatar,
   } = formData;
 
-  const onChange = e =>
+  const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
     editProfile(formData);
   };
@@ -73,47 +73,49 @@ const EditProfile = ({
   return (
     <Fragment>
       <Navbar />
-      <br />
-      <br />
-      <div className='editprotop'>
-        <div className='myrectop_cont'>Edit your profile</div>
-        <hr className='myrechr1' />
-      </div>
-      <div className='editpro_bg'>
-        <br />
-        <br />
-        <br />
-        <div className='container'>
-          <div className='row editprobot'>
-            <div className='col-lg-8'>
-              <form onSubmit={e => onSubmit(e)}>
-                <div className='row editprorows'>
-                  <div className='col-lg-3 editprotext'>Username:</div>
-                  <div className='col-lg-9'>
-                    <input
-                      className='editproinput'
-                      type='text'
-                      placeholder='UserName'
-                      name='name'
-                      value={name}
-                      onChange={e => onChange(e)}
-                    />
-                  </div>
+
+      {
+        <div>
+          <div className='login_bg2'>
+            <div className='login_form_div2'>
+              <div className='editprotop'>
+                <div className='myrectop_cont'>
+                  <span className='futura'>
+                    <span className='futuraa'>Edit </span>your profile
+                  </span>
                 </div>
-                <div className='row editprorows'>
-                  <div className='col-lg-3 editprotext'>Email:</div>
-                  <div className='col-lg-9'>
-                    <input
-                      className='editproinput'
-                      type='text'
-                      placeholder='email'
-                      name='email'
-                      value={email}
-                      onChange={e => onChange(e)}
-                    />
-                  </div>
-                </div>
-                {/* <div className="row editprorows">
+              </div>
+              <div className='container'>
+                <div>
+                  <div className='col-lg'>
+                    <form onSubmit={(e) => onSubmit(e)}>
+                      <div className='row editprorows'>
+                        <div className='col-lg-3 editprotext'>USERNAME:</div>
+                        <div className='col-lg-9'>
+                          <input
+                            className='editproinput'
+                            type='text'
+                            placeholder='UserName'
+                            name='name'
+                            value={name}
+                            onChange={(e) => onChange(e)}
+                          />
+                        </div>
+                      </div>
+                      <div className='row editprorows'>
+                        <div className='col-lg-3 editprotext'>EMAIL:</div>
+                        <div className='col-lg-9'>
+                          <input
+                            className='editproinput'
+                            type='text'
+                            placeholder='email'
+                            name='email'
+                            value={email}
+                            onChange={(e) => onChange(e)}
+                          />
+                        </div>
+                      </div>
+                      {/* <div className="row editprorows">
                 <div className="col-lg-3 editprotext">Date of birth:</div>
                 <div className="col-lg-9">
                   <input
@@ -140,76 +142,80 @@ const EditProfile = ({
                   />
                 </div>
               </div> */}
-                <div className='row editprorows'>
-                  <div className='col-lg-3 editprotext'>Image:</div>
-                  <div className='col-lg-9'>
-                    <input
-                      className='editproinput'
-                      type='image'
-                      placeholder='image'
-                      name='image'
-                      value={avatar}
-                      onChange={e => onChange(e)}
-                    />
+                      <div className='row editprorows'>
+                        <div className='col-lg-3 editprotext'>IMAGE:</div>
+                        <div className='col-lg-9'>
+                          <input
+                            className='editproinput'
+                            type='image'
+                            placeholder='image'
+                            name='image'
+                            value={avatar}
+                            onChange={(e) => onChange(e)}
+                          />
+                        </div>
+                      </div>
+                      <div className='row editprorows'>
+                        <div className='col-lg-3 editprotext'>ADDRESS:</div>
+                        <div className='col-lg-9'>
+                          <div>
+                            <input
+                              className='editproinput'
+                              type='text'
+                              placeholder='Locality'
+                              name='locality'
+                              value={locality}
+                              onChange={(e) => onChange(e)}
+                            />
+                          </div>
+
+                          <div>
+                            <input
+                              className='editproinput'
+                              type='text'
+                              placeholder='City'
+                              name='city'
+                              value={city}
+                              onChange={(e) => onChange(e)}
+                            />
+                          </div>
+
+                          <div>
+                            <input
+                              className='editproinput'
+                              type='text'
+                              placeholder='Pincode'
+                              name='pincode'
+                              value={pincode}
+                              onChange={(e) => onChange(e)}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <br />
+                      <div>
+                        <button className='editprobtn' type='submit'>
+                          SAVE
+                        </button>
+                        <br />
+                        <br />
+                      </div>
+                    </form>
+                    <div className='cak'>
+                      <button
+                        className='editprobtn2'
+                        onClick={() => deleteAccount()}
+                      >
+                        <i className='fas fa-trash'></i> &nbsp; DELETE ACCOUNT
+                      </button>
+                    </div>
                   </div>
                 </div>
-                <div className='row editprorows'>
-                  <div className='col-lg-3 editprotext'>Address:</div>
-                  <div className='col-lg-9'>
-                    <div>
-                      <input
-                        className='editproinput'
-                        type='text'
-                        placeholder='Locality'
-                        name='locality'
-                        value={locality}
-                        onChange={e => onChange(e)}
-                      />
-                    </div>
-
-                    <div>
-                      <input
-                        className='editproinput'
-                        type='text'
-                        placeholder='City'
-                        name='city'
-                        value={city}
-                        onChange={e => onChange(e)}
-                      />
-                    </div>
-
-                    <div>
-                      <input
-                        className='editproinput'
-                        type='text'
-                        placeholder='Pincode'
-                        name='pincode'
-                        value={pincode}
-                        onChange={e => onChange(e)}
-                      />
-                    </div>
-                  </div>
-                </div>
-                <br />
-                <div>
-                  <button className='editprobtn' type='submit'>
-                    Save
-                  </button>
-                  <br />
-                  <br />
-                  <br />
-                  <br />
-                </div>
-              </form>
-            </div>
-            <div className='col-lg-4' style={{ paddingTop: '3%' }}>
-              <button className='editprobtn2' onClick={() => deleteAccount()}>
-                <i className='fas fa-trash'></i> &nbsp; Delete Account
-              </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      }
     </Fragment>
   );
 };
@@ -217,11 +223,11 @@ const EditProfile = ({
 EditProfile.propTypes = {
   editProfile: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired,
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-  profile: state.profile
+const mapStateToProps = (state) => ({
+  profile: state.profile,
 });
 
 export default connect(mapStateToProps, { editProfile, getCurrentProfile })(

@@ -11,6 +11,7 @@
     "react": "^16.12.0",
     "react-alert": "^6.0.0",
     "react-alert-template-oldschool-dark": "^1.0.1",
+    "react-credit-cards": "^0.8.0",
     "react-dom": "^16.12.0",
     "react-moment": "^0.9.7",
     "react-redux": "^7.2.0",

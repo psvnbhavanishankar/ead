@@ -1,0 +1,76 @@
+.back2 {
+  position: relative;
+  background: url('../../img/blog.jpg') no-repeat;
+  background-size: cover;
+  height: 130vh;
+}
+
+.back10 {
+  background-image: url('../../img/sky.jpg');
+  background-repeat: repeat-y;
+}
+
+.container1 {
+  text-align: center;
+  /* float: right; */
+  position: absolute;
+  top: 10%;
+  left: 25%;
+  width: 50%;
+  height: 90%;
+}
+
+.container .card100 {
+  background-color: #313131;
+  opacity: 0.9;
+}
+
+.card2 {
+  text-align: left;
+  /* float: right; */
+  position: relative;
+  top: 15%;
+  left: 15%;
+  color: white;
+  width: 75%;
+  height: 75%;
+  background-color: #313131;
+  opacity: 0.9;
+  padding: 1%;
+  /* display: inline-block; */
+}
+.editprotext6 {
+  font-family: karla;
+  font-size: larger;
+  padding-top: 3%;
+  padding-left: 5%;
+  text-align: left;
+  color: white;
+}
+
+.log_btn6 {
+  text-align: center;
+  border: none;
+  text-decoration: none;
+  height: 34px;
+  color: white;
+  background-color: #c89a69;
+  width: 75%;
+  margin-top: 20px;
+}
+
+.ai {
+  font-family: Rokkitt;
+  font-weight: bold;
+  font-size: xx-large;
+}
+
+.futura {
+  font-family: 'Rokkitt';
+  color: white;
+  font-size: 3rem;
+}
+
+.futuraa {
+  color: #c89a69;
+}

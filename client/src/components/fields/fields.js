@@ -6,6 +6,16 @@ import { getFields, postFields } from '../../actions/fields';
 import { setAlert } from '../../actions/alert';
 import { createMessage } from '../../actions/messages';
 import './options.css';
+import personalinjury from '../../img/practice-3.jpg';
+import familylaw from '../../img/practice-4.jpg';
+import employmentlaw from '../../img/practice-6.jpg';
+import bankandfinancial from '../../img/practice-2.jpg';
+import capitalmarket from '../../img/practice-5.jpg';
+import accidents from '../../img/practice-1.jpg';
+import disputeresolution from '../../img/practice-8.jpg';
+import corporate from '../../img/practice-7.jpg';
+import Navbar from '../layout/Navbar3';
+
 // import Navbar from './Navbar';
 
 const Fields = ({
@@ -14,26 +24,26 @@ const Fields = ({
   createMessage,
   auth,
   fields: { fields, post_fields },
-  onSubmit
+  onSubmit,
 }) => {
   useEffect(() => {
     getFields();
   }, []);
   const selected_fields = {
     user_id: auth.user,
-    selected: []
+    selected: [],
   };
 
-  onSubmit = e => {
+  onSubmit = (e) => {
     e.preventDefault();
     postFields(selected_fields);
     createMessage({
-      fieldsSelected: 'Your fields of experience have been noted!'
+      fieldsSelected: 'Your fields of experience have been noted!',
     });
     // return <Redirect to='/dashboard' />;
   };
 
-  const onChange = function(id) {
+  const onChange = function (id) {
     if (fields && fields.fields) {
       if (document.getElementById(id).checked === true) {
         for (var i = 0; i < fields.fields.length; i++) {
@@ -57,6 +67,18 @@ const Fields = ({
       }
     }
   };
+  var count = 0;
+
+  var array = [
+    personalinjury,
+    familylaw,
+    employmentlaw,
+    bankandfinancial,
+    capitalmarket,
+    accidents,
+    disputeresolution,
+    corporate,
+  ];
 
   if (post_fields) {
     return <Redirect to='/lawyerdashboard' />;
@@ -66,51 +88,43 @@ const Fields = ({
     <Fragment>
       {
         <Fragment>
-          <div className='cuisine_bg' style={{ minHeight: '100vh' }}>
-            <div class='row cuisinetoprow'>
-              <div class='col-lg-4 cuisinelogo'>
-                <img
-                  class='cuisinelogocont'
-                  src='https://i.ibb.co/H7TfPXB/Logo-01.png'
-                />
-              </div>
+          <Navbar />
+          <br />
+          <br />
+          <br />
+          <div className='cuisine_bgg'></div>
 
-              <div class='col-lg-4 cusinerow1col2'>
-                <span class='cuisineheadfutura'>
-                  Select your Fields of Experience
-                </span>
-                <hr class='cuisinehr1' />
-              </div>
-              {/* <div class='col-lg-4 cuisinenext'>
-                <Link className='nextattri' to='/lawyerdashboard'>
-                  Next&nbsp;&nbsp;
-                  <i class='fas fa-arrow-right' style={{ fontSize: '70%' }}></i>
-                </Link>
-              </div> */}
-            </div>
-            <br />
-            <br />
-            <br />
-            <br />
+          <div className='ak1'>
             <div className='container'>
+              <div>
+                <span class='cuisineheadfutura'>
+                  Select your
+                  <span class='futuraa'> Fields </span>of Experience
+                </span>
+                <br />
+              </div>
               <form onSubmit={onSubmit}>
                 <div class='row'>
                   {fields && fields.fields ? (
-                    fields.fields.map(field => (
+                    fields.fields.map((field) => (
                       <div
                         className='col-lg-3'
                         style={{ paddingBottom: '70px' }}
                       >
                         <div class='cuisinerow2col1cont'>
                           <div
+                            id='wrapper'
                             class='recipe'
                             style={{ overflow: 'hidden' }}
                             id='MyElement'
                           >
                             <img
-                              style={{ width: '120%' }}
-                              src='https://i.ibb.co/jg42fmy/28-KITCHEN1-article-Large.jpg'
+                              style={{ width: '150%' }}
+                              src={array[count++]}
                             />
+
+                            {/* {(count = count + 1)} */}
+
                             <label style={{ width: '93%' }}>
                               <div
                                 className='row'
@@ -140,7 +154,7 @@ const Fields = ({
                   )}
 
                   <button className='cuisinesavebtn' type='submit'>
-                    Save
+                    SAVE
                   </button>
                 </div>
               </form>
@@ -158,16 +172,16 @@ Fields.propTypes = {
   createMessage: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   fields: PropTypes.array.isRequired,
-  post_fields: PropTypes.bool
+  post_fields: PropTypes.bool,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
-  fields: state.fields
+  fields: state.fields,
 });
 
 export default connect(mapStateToProps, {
   getFields,
   postFields,
-  createMessage
+  createMessage,
 })(Fields);

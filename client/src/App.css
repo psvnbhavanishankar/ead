@@ -46,10 +46,11 @@ img {
 
 /* Text Styles*/
 .x-large {
-  font-size: 5rem;
+  font-size: 4rem;
   line-height: 1.2;
   /* margin-bottom: 1rem; */
   margin-top: 1.5em;
+  margin-top: 2em;
 }
 
 .large {

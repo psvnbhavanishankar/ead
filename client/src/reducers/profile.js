@@ -5,7 +5,7 @@ import {
   CLEAR_PROFILE,
   GET_PROFILES,
   GET_LAWYER_BY_FIELD,
-  LAWYER_BY_FIELD_ERROR
+  LAWYER_BY_FIELD_ERROR,
 } from '../actions/types';
 
 const initialState = {
@@ -14,10 +14,11 @@ const initialState = {
   profiles: [],
   loading: true,
   showProfileInfo: true,
-  error: {}
+  error: {},
+  getlawyersuccess: null,
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
@@ -25,38 +26,39 @@ export default function(state = initialState, action) {
       return {
         ...state,
         profile: payload,
-        loading: false
+        loading: false,
       };
     case GET_LAWYER_PROFILE:
       return {
         ...state,
         lawyerprofile: payload,
-        loading: false
+        getlawyersuccess: true,
+        loading: false,
       };
     case GET_LAWYER_BY_FIELD:
       return {
         ...state,
         profiles: payload,
-        loading: false
+        loading: false,
       };
     case GET_PROFILES:
       return {
         ...state,
         profiles: payload,
-        loading: false
+        loading: false,
       };
     case PROFILE_ERROR:
     case LAWYER_BY_FIELD_ERROR:
       return {
         ...state,
         error: payload,
-        loading: false
+        loading: false,
       };
     case CLEAR_PROFILE:
       return {
         ...state,
         profile: null,
-        loading: false
+        loading: false,
       };
     default:
       return state;

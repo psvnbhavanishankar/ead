@@ -1,5 +1,9 @@
-.cuisine_bg {
-  background-color: #f4c613;
+.cuisine_bgg {
+  position: relative;
+  background: url('../../img/sky.jpg') no-repeat;
+  background-size: cover;
+
+  height: 150vh;
 }
 .rowtop {
   background-color: white;
@@ -39,7 +43,7 @@ a {
   text-align: left;
 }
 .rowtopcol2 {
-  margin-top: 3%;
+  margin-top: 1%;
 }
 .rowtopcol3 {
   font-family: Karla;
@@ -112,7 +116,7 @@ a {
   margin-top: 3%;
 }
 .cuisineheadfutura {
-  font-family: futura Md BT;
+  font-family: Rokkitt;
   font-size: 24pt;
 }
 .cuisinehr1 {
@@ -127,25 +131,50 @@ a {
   padding-left: 14%;
   padding-top: 1%;
 }
+
 .cuisinerow2col1cont {
   background-color: white;
-  width: 75%;
-
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 5px;
   height: 100%;
   margin: auto;
 }
+.cuisinerow2col1cont:hover {
+  transition: 0.2s;
+  box-shadow: 5px 5px 5px black;
+  border: 2px solid #777;
+}
+
+.ak1 {
+  text-align: center;
+  /* float: right; */
+  position: absolute;
+  top: 20%;
+  left: 10%;
+
+  width: 80%;
+  height: 130%;
+  background-color: #f5d6c6;
+  opacity: 0.9;
+}
 .cuisineinput {
   margin-top: 16px;
+  border: 2px dotted #00f;
+  display: block;
+  background: #ff0000;
 }
 .cuisinesavebtn {
-  position: absolute;
-  top: 4%;
+  top: 10%;
   right: 8%;
   color: white;
+  font-family: sans-serif;
   background-color: black;
   border: none;
   padding: 6px;
-  width: 70px;
+  width: 100px;
+  height: 50px;
 }
 .cuisineimg2 {
   width: 145%;
@@ -166,4 +195,14 @@ a {
 .cuisineimg3 {
   width: 145%;
   margin-left: -20%;
+}
+
+.futura {
+  font-family: 'Rokkitt';
+  color: white;
+  font-size: 3rem;
+}
+
+.futuraa {
+  color: #c89a69;
 }
