@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
+import logo from '../../img/logo.png';
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
@@ -44,7 +45,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
             </a>
             <a class='dropdown-item'>
               <Link
-                to='/bloglistt'
+                to='/bloglist'
                 style={{
                   color: 'inherit',
                   textDecoration: 'inherit',
@@ -105,6 +106,36 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
       </li>
       <li>
         <button class='btn '>
+          <Link
+            to='/searchl'
+            className='navtitles'
+            style={{
+              color: 'inherit',
+              textDecoration: 'inherit',
+              fontWeight: 'bold',
+            }}
+          >
+            Search
+          </Link>
+        </button>
+      </li>
+      <li>
+        <button class='btn '>
+          <Link
+            to='/join2'
+            className='navtitles'
+            style={{
+              color: 'inherit',
+              textDecoration: 'inherit',
+              fontWeight: 'bold',
+            }}
+          >
+            Chat
+          </Link>
+        </button>
+      </li>
+      <li>
+        <button class='btn '>
           <a
             onClick={logout}
             href='/login'
@@ -148,10 +179,11 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   return (
     <nav className='navbar'>
       <h1>
-        <Link to='/'>
-          <i class='fa fa-balance-scale' aria-hidden='true'></i>{' '}
-          <span className='title1'>DeJure</span>
-        </Link>
+        {
+          <Link to='/'>
+            <img src={logo}></img>
+          </Link>
+        }
       </h1>
       {!loading && (
         <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>

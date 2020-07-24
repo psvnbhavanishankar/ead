@@ -3,22 +3,25 @@ const mongoose = require('mongoose');
 const ClientProfileSchema = mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'client'
+    ref: 'client',
+  },
+  image: {
+    type: String,
   },
   address: {
     locality: {
       type: String,
-      default: ''
+      default: '',
     },
     city: {
       type: String,
-      default: ''
+      default: '',
     },
     pincode: {
       type: Number,
-      default: 111111
-    }
-  }
+      default: 111111,
+    },
+  },
 });
 
 module.exports = ClientProfile = mongoose.model(

@@ -33,15 +33,12 @@ export class UploadPost extends Component {
     return (
       <Fragment>
         <Navbar />
-        <br />
-        <br />
-        <br />
-        <div className='back1'>
-          <div className='container2'>
+        <div className='back232'>
+          <div className='container911'>
             <div className='card3'>
               <div className='card-header'>
                 <div className='row' style={{ textAlign: 'center' }}>
-                  <h4 className='col-12'>
+                  <h4 className='col-12' style={{ fontSize: '30px' }}>
                     UPLOAD POST&nbsp;
                     <i className='fa fa-pen-alt' />
                   </h4>
@@ -54,7 +51,7 @@ export class UploadPost extends Component {
                     <label
                       className='col-12'
                       id='ut'
-                      style={{ textAlign: 'center' }}
+                      style={{ textAlign: 'left', fontSize: '20px' }}
                     >
                       TITLE :
                     </label>
@@ -68,11 +65,12 @@ export class UploadPost extends Component {
                     />
                   </div>
                   <br />
+                  <br />
                   <div className='row'>
                     <label
                       className='col-12'
                       id='ut'
-                      style={{ textAlign: 'center' }}
+                      style={{ textAlign: 'left', fontSize: '20px' }}
                     >
                       CONTENT :
                     </label>
@@ -89,7 +87,7 @@ export class UploadPost extends Component {
                   <br />
                   <div className='row2' style={{ paddingLeft: '20%' }}>
                     <button className='log_btn7' type='submit'>
-                      UploadPost
+                      Upload Post
                     </button>
                   </div>
                 </form>

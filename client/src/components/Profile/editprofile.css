@@ -10,12 +10,12 @@
   position: relative;
   background: url('../../img/profile.jpg') no-repeat;
   background-size: cover;
-  height: 160vh;
+  height: 100vh;
 }
 .cab {
   /* position: relative; */
-  background-image: url('../../img/sky.jpg');
-  background-repeat: repeat-y;
+  /* background-image: url('../../img/sky.jpg'); */
+  background-color: #e8d1bc;
 
   /* height: 120vh;
   font-family: Rokkitt;
@@ -30,10 +30,15 @@
   top: 15%;
   left: 30%;
   width: 40%;
-  height: 80%;
+
   background-color: #313131;
   opacity: 0.9;
   padding: 1%;
+}
+
+.login_form_div2 {
+  max-height: 560px;
+  overflow-y: scroll;
 }
 
 /* .editprobot {
@@ -66,6 +71,24 @@
 .editpro_bg {
   border: '0';
 }
+
+.phone {
+  text-decoration: none;
+  color: white;
+}
+
+.phone:hover {
+  color: white;
+}
+
+.myimg {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 180px;
+  height: 180px;
+}
+
 .editproinput {
   border: none;
   border-bottom: 1px solid #000000e0;

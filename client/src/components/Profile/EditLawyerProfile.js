@@ -2,15 +2,21 @@ import React, { useState, Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { editLawyerProfile, getLawyerProfile } from '../../actions/profile';
-import { Link, withRouter } from 'react-router-dom';
+import { isPossiblePhoneNumber } from 'react-phone-number-input';
+import { Link, withRouter, Redirect } from 'react-router-dom';
 import { deleteAccount } from '../../actions/profile';
+import { createMessage } from '../../actions/messages';
 import Navbar from '../layout/Navbar3';
+import Spinner from '../layout/Spinner';
 import './editprofile2.css';
+import img from './user.png';
 
 const EditLawyerProfile = ({
-  profile: { lawyerprofile, loading },
+  profile: { lawyerprofile, loading, edit },
   editLawyerProfile,
   getLawyerProfile,
+  isPossiblePhoneNumber,
+  createMessage,
   auth,
 }) => {
   const [formData, setFormData] = useState({
@@ -19,10 +25,10 @@ const EditLawyerProfile = ({
     pincode: '',
     // skills: "",
     // dob: "",
-    // mobile: "",
+    mobile: '',
     name: '',
+    image: '',
     email: '',
-    avatar: '',
     enrollmentno: '',
     state: '',
     licensed_year: '',
@@ -49,12 +55,12 @@ const EditLawyerProfile = ({
           ? ''
           : lawyerprofile.address.pincode,
       // dob: loading || !lawyerprofile.dob ? "" : lawyerprofile.dob,
-      // mobile: loading || !lawyerprofile.mobile ? "" : lawyerprofile.mobile,
+      mobile: loading || !lawyerprofile.mobile ? '' : lawyerprofile.mobile,
+      image: loading || !lawyerprofile.image ? '' : lawyerprofile.image,
       name: loading || !lawyerprofile.user.name ? '' : lawyerprofile.user.name,
       email:
         loading || !lawyerprofile.user.email ? '' : lawyerprofile.user.email,
-      avatar:
-        loading || !lawyerprofile.user.avatar ? '' : lawyerprofile.user.avatar,
+
       enrollmentno:
         loading || !lawyerprofile.user.enrollmentno
           ? ''
@@ -77,30 +83,105 @@ const EditLawyerProfile = ({
     pincode,
     // skills,
     // dob,
-    // mobile,
+    mobile,
     name,
     email,
-    avatar,
+    image,
     enrollmentno,
     state,
     licensed_year,
     experience,
     price,
   } = formData;
+  var image_content = '';
+
+  function refreshPage() {
+    window.location.reload();
+  }
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
+  const onChange2 = (e) => {
+    let files = e.target.files[0];
+    console.log(e.target.files[0]);
+
+    let reader = new FileReader();
+    reader.readAsDataURL(files);
+
+    reader.onload = (e) => {
+      image_content = e.target.result;
+      console.log(image_content);
+    };
+    console.log(image_content);
+    console.log(e.target.name);
+  };
+  var data;
+
   const onSubmit = (e) => {
     e.preventDefault();
-    editLawyerProfile(formData);
+
+    if (image_content) {
+      data = {
+        locality,
+        city,
+        pincode,
+        // skills,
+        // dob,
+        mobile,
+        name,
+        email,
+        image: image_content,
+        image_content,
+        enrollmentno,
+        state,
+        licensed_year,
+        experience,
+        price,
+      };
+    } else {
+      data = {
+        locality,
+        city,
+        pincode,
+        // skills,
+        // dob,
+        mobile,
+        name,
+        email,
+        image_content,
+        enrollmentno,
+        state,
+        licensed_year,
+        experience,
+        price,
+      };
+    }
+    console.log(data);
+    var phoneno = /^\d{10}$/;
+    if (!mobile.match(phoneno)) {
+      createMessage({
+        mobile: 'Please check possibility of the mobile number',
+      });
+    } else {
+      createMessage({
+        wait: 'Updating. Please wait.',
+      });
+      editLawyerProfile(data);
+    }
   };
 
-  return (
+  if (edit) {
+    createMessage({
+      profile: 'Profile Updated Succesfully',
+    });
+    refreshPage();
+  }
+
+  return !loading ? (
     <Fragment>
       <Navbar />
-      <br />
-      <br />
+
       <div className='login_bg3'>
         <div className='login_form_div3'>
           <div className='editprotop'>
@@ -111,9 +192,16 @@ const EditLawyerProfile = ({
             </div>
             <hr className='myrechr1' />
           </div>
+          {lawyerprofile ? (
+            <img
+              className='myimg'
+              src={lawyerprofile.image}
+              onError={{ src: { img } }}
+            ></img>
+          ) : (
+            ''
+          )}
 
-          <br />
-          <br />
           <br />
           <div className='container'>
             <div className='row editprobot'>
@@ -185,34 +273,34 @@ const EditLawyerProfile = ({
                     onChange={e => onChange(e)}
                   />
                 </div>
-              </div>
-              <div className="row editprorows">
-                <div className="col-lg-3 editprotext">Mobile:</div>
-                <div className="col-lg-9">
-                  {" "}
-                  <input
-                    className="editproinput"
-                    type="text"
-                    placeholder="Mobile Number"
-                    name="mobile"
-                    value={mobile}
-                    onChange={e => onChange(e)}
-                  />
-                </div>
               </div> */}
                   <div className='row editprorows'>
-                    <div className='col-lg-3 editprotext2'>Image:</div>
+                    <div className='col-lg-3 editprotext2'>Mobile:</div>
                     <div className='col-lg-9'>
+                      {' '}
                       <input
-                        className='editproinput2'
-                        type='image'
-                        placeholder='image'
-                        name='image'
-                        value={avatar}
+                        className='editproinput'
+                        type='text'
+                        placeholder='Mobile Number'
+                        name='mobile'
+                        value={mobile}
                         onChange={(e) => onChange(e)}
                       />
                     </div>
                   </div>
+                  <div className='row editprorows'>
+                    <div className='col-lg-3 editprotext2'>Image:</div>
+                    <div className='col-lg-9'>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <input
+                        type='file'
+                        name='image'
+                        accept='image/jpeg, image/jpg, image/png'
+                        onChange={(e) => onChange2(e)}
+                      />
+                    </div>
+                  </div>
+
                   <div className='row editprorows'>
                     <div className='col-lg-3 editprotext2'>Address:</div>
                     <div className='col-lg-9'>
@@ -315,6 +403,8 @@ const EditLawyerProfile = ({
         </div>
       </div>
     </Fragment>
+  ) : (
+    <Spinner />
   );
 };
 
@@ -332,4 +422,6 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   editLawyerProfile,
   getLawyerProfile,
+  isPossiblePhoneNumber,
+  createMessage,
 })(EditLawyerProfile);

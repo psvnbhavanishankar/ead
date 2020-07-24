@@ -10,11 +10,11 @@
   position: relative;
   background: url('../../img/profile.jpg') no-repeat;
   background-size: cover;
-  height: 250vh;
+  height: 100vh;
 }
 .cab {
   /* position: relative; */
-  background-image: url('../../img/sky.jpg');
+  background-color: #e6d9cc;
   background-repeat: repeat-y;
 
   /* height: 120vh;
@@ -30,10 +30,15 @@
   top: 15%;
   left: 30%;
   width: 40%;
-  height: 80%;
+
   background-color: #313131;
   opacity: 0.9;
   padding: 1%;
+}
+
+.login_form_div3 {
+  max-height: 565px;
+  overflow-y: scroll;
 }
 
 /* .editprobot {
@@ -139,6 +144,13 @@
 
 .myrectop_cont {
   padding: 25px;
+}
+
+.myimg {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
 }
 
 .jas {

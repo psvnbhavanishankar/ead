@@ -1,0 +1,135 @@
+.scrollable-menu {
+  height: auto;
+  max-height: 250px;
+  overflow-x: hidden;
+  width: 30%;
+  text-align: center;
+  font-family: 'Quicksand';
+}
+
+.abhi3 {
+  background-color: #e6d9cc;
+  background-repeat: repeat-y;
+}
+
+.abhi {
+  font-family: 'Raleway';
+  position: relative;
+  top: 10%;
+  left: 25%;
+  width: 75%;
+  color: 'black';
+}
+
+#root {
+  background-color: #e6d9cc;
+  background-repeat: repeat-y;
+}
+.back10 {
+  background-color: #e6d9cc;
+  background-repeat: repeat-y;
+}
+.abhi2 {
+  font-family: 'Raleway';
+  position: relative;
+  top: 10%;
+  left: 10%;
+
+  color: 'black';
+}
+
+abhi2:hover {
+  background-color: black;
+}
+
+.back1000 {
+  position: relative;
+  background-image: url('../../img/posts.jpg');
+  background-repeat: repeat-y;
+}
+
+.back100 {
+  position: relative;
+  background-color: #e6d9cc;
+  background-repeat: repeat-y;
+}
+
+.container1 {
+  text-align: center;
+  /* float: right; */
+  position: absolute;
+  top: 10%;
+  left: 25%;
+  width: 50%;
+  height: 90%;
+}
+
+.container .card100 {
+  background-color: #313131;
+  opacity: 0.9;
+}
+
+.container3 {
+  background-color: #313131;
+  opacity: 0.9;
+}
+
+.cardaaa {
+  text-align: left;
+  /* float: right; */
+  position: relative;
+  top: 15%;
+  left: 14%;
+  bottom: 15%;
+  color: white;
+  width: 75%;
+  height: 75%;
+  background-color: #313131;
+  opacity: 0.9;
+}
+
+.card {
+  margin-bottom: 100px;
+}
+
+.editprotext6 {
+  font-family: karla;
+  font-size: larger;
+  padding-top: 3%;
+  padding-left: 5%;
+  text-align: left;
+  color: white;
+}
+
+.log_btn20 {
+  text-align: center;
+  border: none;
+  text-decoration: none;
+  height: 34px;
+  color: white;
+  background-color: #c89a69;
+  width: 25%;
+  margin-top: 20px;
+}
+
+.ai {
+  font-family: Rokkitt;
+  font-weight: bold;
+  font-size: xx-large;
+}
+
+.futura {
+  font-family: 'Rokkitt';
+  color: white;
+  font-size: 3rem;
+}
+
+.futuraa {
+  color: #c89a69;
+}
+
+.jas2 {
+  text-align: left;
+  color: white;
+  font-family: Raleway, sans-serif;
+}

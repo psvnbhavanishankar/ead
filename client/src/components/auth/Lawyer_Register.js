@@ -6,7 +6,7 @@ import { lawyer_register } from '../../actions/auth';
 import { createMessage } from '../../actions/messages';
 import PropTypes from 'prop-types';
 import './register.css';
-// import Navbar from '../layout/Navbar';
+import Navbar from '../layout/Navbar';
 
 export class Lawyer_Register extends Component {
   state = {
@@ -15,19 +15,19 @@ export class Lawyer_Register extends Component {
     lawyerstate: '',
     email: '',
     password: '',
-    password2: ''
+    password2: '',
   };
 
   static propTypes = {
     setAlert: PropTypes.func.isRequired,
     lawyer_register: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool,
-    createMessage: PropTypes.func.isRequired
+    createMessage: PropTypes.func.isRequired,
   };
 
-  onChange = e => this.setState({ [e.target.name]: e.target.value });
+  onChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
-  onSubmit = async e => {
+  onSubmit = async (e) => {
     e.preventDefault();
     let {
       lawyername,
@@ -35,7 +35,7 @@ export class Lawyer_Register extends Component {
       password,
       password2,
       lawyerstate,
-      enrollmentnumber
+      enrollmentnumber,
     } = this.state;
 
     let name = this.props.verify.name;
@@ -48,14 +48,14 @@ export class Lawyer_Register extends Component {
       this.props.createMessage({ passwordsNotMatch: 'Passwords do not match' });
     } else {
       this.props.createMessage({
-        wait: 'You will be redirected. Please wait.'
+        wait: 'You will be redirected. Please wait.',
       });
       this.props.lawyer_register({
         name,
         email,
         password,
         state,
-        enrollmentno
+        enrollmentno,
       });
     }
   };
@@ -88,14 +88,14 @@ export class Lawyer_Register extends Component {
       lawyerstate,
       email,
       password,
-      password2
+      password2,
     } = this.state;
 
     return (
       <Fragment>
-        {/* <Navbar /> */}
+        <Navbar />
         <div className='register_bg3'>
-          <div className='reg_form_div'>
+          <div className='reg_form_div3'>
             <div>
               <span className='futura'>Lawyer Registration</span>
               <hr className='reg_hr' />
@@ -172,17 +172,17 @@ export class Lawyer_Register extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
   isVerified: state.verify.isVerified,
   auth: state.auth,
   verify: state.verify,
   createMessage: PropTypes.func.isRequired,
-  email_sent: PropTypes.bool
+  email_sent: PropTypes.bool,
 });
 
 export default connect(mapStateToProps, {
   setAlert,
   lawyer_register,
-  createMessage
+  createMessage,
 })(Lawyer_Register);

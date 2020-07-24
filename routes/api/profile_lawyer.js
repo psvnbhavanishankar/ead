@@ -10,8 +10,14 @@ const { check, validationResult } = require('express-validator/check');
 router.get('/me', auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({
-      user: req.user.id
-    }).populate('user', ['_id', 'address','experience','practice_areas','licensed_year']);
+      user: req.user.id,
+    }).populate('user', [
+      '_id',
+      'address',
+      'experience',
+      'practice_areas',
+      'licensed_year',
+    ]);
     //const profile = await Profile.findOne({ user: req.user.id });
     if (!profile) {
       return res
@@ -54,30 +60,37 @@ router.get('/me', auth, async (req, res) => {
 // //@route POST api/profile
 // //@access private
 router.post(
-'/',
-[
-  auth,
-//   [
-//     check('skills', 'skills are required')
-//       .not()
-//       .isEmpty()
-//   ]
-],
+  '/',
+  [
+    auth,
+    //   [
+    //     check('skills', 'skills are required')
+    //       .not()
+    //       .isEmpty()
+    //   ]
+  ],
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { locality,city,pincode,licensed_year,practice_areas,experience } = req.body;
+    const {
+      locality,
+      city,
+      pincode,
+      licensed_year,
+      practice_areas,
+      experience,
+    } = req.body;
     const profileFields = {};
     profileFields.user = req.user.id;
-    profileFields.address={
-        locality:locality,
-        city:city,
-        pincode:pincode
+    profileFields.address = {
+      locality: locality,
+      city: city,
+      pincode: pincode,
     };
-    profileFields.licensed_year=licensed_year
+    profileFields.licensed_year = licensed_year;
     try {
       let profile = await Profile.findOne({ user: req.user.id });
       if (profile) {
@@ -101,17 +114,17 @@ router.post(
 router.post('/update', auth, async (req, res) => {
   try {
     const update = {
-        address: {
+      address: {
         locality: req.body.locality,
         city: req.body.city,
-        pincode: req.body.pincode
-      }
+        pincode: req.body.pincode,
+      },
     };
     let profile = await Profile.findOneAndUpdate(
       { user: req.user.id },
       update,
       {
-        new: true
+        new: true,
       }
     );
     await profile.save();
@@ -178,11 +191,11 @@ router.post('/update', auth, async (req, res) => {
 // //@route GET profile of one user by id api/profile/user/:user_id
 // //@access public
 
-router.get('/user/:user_id', async (req, res) => {
+router.get('/:profile_id', async (req, res) => {
   try {
     const profile = await Profile.findOne({
-      user: req.params.user_id
-    }).populate('user', ['_id', 'name', 'email']);
+      _id: req.params.profile_id,
+    }).populate('user', ['_id', 'name', 'email', 'enrollmentno', 'state']);
     if (!profile) {
       res.status(400).json({ msg: 'profile not found' });
     }
@@ -207,7 +220,7 @@ router.get('/', async (req, res) => {
       'email',
       'locality',
       'city',
-      'pincode'
+      'pincode',
     ]);
     res.json(profiles);
   } catch (err) {

@@ -11,6 +11,7 @@ import Blog from './Blog';
 import allblogs from './allblogs';
 import posts from './posts';
 import comments from './comments';
+import join from './join';
 
 export default combineReducers({
   alert,
@@ -25,4 +26,5 @@ export default combineReducers({
   allblogs,
   posts,
   comments,
+  join,
 });

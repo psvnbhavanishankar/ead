@@ -2,104 +2,96 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
-import { getLawyerProfileById } from '../../actions/profile';
+import { getLawyerbyID } from '../../actions/profile';
 import Navbar from '../layout/Navbar';
+import Spinner from '../layout/Spinner';
 import './editprofile.css';
+import './lawyerdisplay.css';
+import user from './user.png';
 const LawyerProfilesByField = ({
   profile: { profile, loading, profiles, getlawyersuccess },
-  getLawyerProfileById,
+  getLawyerbyID,
 }) => {
-  const onSubmit = (e, data) => {
-    e.preventDefault();
-    getLawyerProfileById(data);
-  };
-
   if (getlawyersuccess) {
-    return <Redirect push to='/pay' />;
+    return <Redirect push to='/view_profile' />;
   }
 
-  return (
-    <Fragment>
-      <Navbar />
-      <br />
-      <br />
-      <br />
+  const onclick = (e, data) => {
+    e.preventDefault();
+    getLawyerbyID(data);
+  };
 
-      <div></div>
+  return !loading ? (
+    <Fragment>
       {
         <Fragment>
-          <div className='cab'>
-            <br />
-            <center>
-              <span className='futura'>
-                <span className='futuraa'>Law</span>yers
-              </span>
-            </center>
-            {profiles ? (
-              profiles.map((profile) => (
-                <div>
-                  <div className='card6'>
-                    <div>
-                      {profile.user && profile.user.name ? (
-                        <div>
-                          <p class='cuisinekarla'>
-                            <span className='jas2'>NAME: </span>{' '}
-                            {profile.user.name}
-                          </p>
-                        </div>
-                      ) : (
-                        ''
-                      )}
-                      {profile.user && profile.user.email ? (
-                        <p class='cuisinekarla'>
-                          <span className='jas2'>EMAIL: </span>
-                          {profile.user.email}
-                        </p>
-                      ) : (
-                        ''
-                      )}
+          <Navbar />
+          <br />
 
-                      {profile.practice_areas
-                        ? profile.practice_areas.map((area) => (
-                            <p className='cuisinekarla'>
-                              <span className='jas2'>FIELDS:</span>
-                              {area}{' '}
-                            </p>
-                          ))
-                        : ''}
+          <div className='ak1'>
+            <div className='container'>
+              <div>
+                <span class='cuisineheadfutura'>
+                  <span class='futuraa'>Lawyers</span>
+                </span>
+                <br />
+                <br />
+                <br />
+                <br />
+              </div>
+              <form>
+                <div class='row'>
+                  {profiles ? (
+                    profiles.map((field) => (
+                      <div
+                        className='col-lg-4'
+                        style={{ paddingBottom: '70px' }}
+                      >
+                        <div id='lawyercard'>
+                          <div style={{ overflow: 'hidden' }}>
+                            <br />
+                            <br />
+                            <img style={{ width: '50%' }} src={user} />
 
-                      <p className='cuisinekarla'>
-                        <span className='jas2'>PRICE:</span>
-                        {profile.price ? profile.price : ''}
-
-                        {profile.user && profile.user._id ? (
-                          <div className='pd'>
-                            <form>
-                              <button
-                                className='log_btn'
-                                onClick={(e) => onSubmit(e, profile.user._id)}
+                            <label style={{ width: '93%' }}>
+                              <div
+                                className='row'
+                                style={{ paddingTop: '10px' }}
                               >
-                                Hire for {profile.price ? profile.price : 0}
-                              </button>
-                            </form>
+                                <div className='col-lg-12'>
+                                  <div class='cuisinekarla'>
+                                    <Link
+                                      onClick={(e) => onclick(e, field._id)}
+                                      style={{
+                                        color: '#664d34',
+                                        textAlign: 'left',
+                                        fontSize: '20px',
+                                        fontFamily: 'Rokkitt',
+                                      }}
+                                    >
+                                      {field.user.name}
+                                    </Link>
+                                    <br />
+                                  </div>
+                                </div>
+                              </div>
+                            </label>
                           </div>
-                        ) : (
-                          ''
-                        )}
-                      </p>
-                    </div>
-                  </div>
-                  <br />
-                  <br />
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <h4>No Lawyers</h4>
+                  )}
                 </div>
-              ))
-            ) : (
-              <p> No profiles</p>
-            )}
+              </form>
+            </div>
           </div>
         </Fragment>
       }
     </Fragment>
+  ) : (
+    <Spinner />
   );
 };
 
@@ -113,6 +105,6 @@ const mapStateToProps = (state) => ({
   profile: state.profile,
 });
 
-export default connect(mapStateToProps, { getLawyerProfileById })(
+export default connect(mapStateToProps, { getLawyerbyID })(
   LawyerProfilesByField
 );

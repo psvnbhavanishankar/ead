@@ -1,10 +1,27 @@
 const express = require('express');
+const socketio = require('socket.io');
+const http = require('http');
+const bodyParser = require('body-parser');
 
 const connectDB = require('./config/db');
+const {
+  addUser,
+  removeUser,
+  getUser,
+  getUsersInRoom,
+} = require('./routes/api/chat_users');
+const { json } = require('express');
 
 const app = express();
 
+// Regarding Chat
+
+const server = http.createServer(app);
+const io = socketio(server);
+
 // Init Middleware
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 app.use(express.json({ extended: false }));
 
@@ -35,6 +52,66 @@ connectDB();
 
 app.get('/', (req, res) => res.send('API running'));
 
+let history = '';
+//io
+io.on('connect', (socket) => {
+  socket.on('join', ({ name, room }, callback) => {
+    const { error, user } = addUser({ id: socket.id, name, room });
+
+    if (error) return callback(error);
+
+    socket.join(user.room);
+
+    socket.emit('message', {
+      user: 'admin',
+      text: `${user.name}, welcome to room ${user.room}.`,
+    });
+
+    if (history) {
+      socket.emit('message', {
+        user: 'admin',
+        text: history,
+      });
+    }
+
+    socket.broadcast
+      .to(user.room)
+      .emit('message', { user: 'admin', text: `${user.name} has joined!` });
+
+    io.to(user.room).emit('roomData', {
+      room: user.room,
+      users: getUsersInRoom(user.room),
+    });
+
+    callback();
+  });
+
+  socket.on('sendMessage', (message, callback) => {
+    const user = getUser(socket.id);
+
+    io.to(user.room).emit('message', { user: user.name, text: message });
+    io.to(user.room).emit('roomData', { user: user.name, text: message });
+    history = message;
+    callback();
+  });
+
+  socket.on('disconnect', () => {
+    const user = removeUser(socket.id);
+
+    if (user) {
+      io.to(user.room).emit('message', {
+        user: 'Admin',
+        text: `${user.name} has left.`,
+      });
+    }
+    // io.to(user.room).emit('roomData', {
+    //   room: user.room,
+    //   users: getUsersInRoom(user.room),
+    // });
+  });
+  console.log('User had left!!');
+});
+
 //Middleware for access to req.body
 
 // app.use(express.static(resolve(__dirname, '/public')));
@@ -45,6 +122,8 @@ app.get('/', (req, res) => res.send('API running'));
 
 //routes
 app.use('/api/users', require('./routes/api/users'));
+
+app.use('/api/chat', require('./routes/api/chat'));
 
 app.use('/api/profile', require('./routes/api/profile'));
 
@@ -94,4 +173,4 @@ app.use('/api/fields', require('./routes/api/fields'));
 
 const PORT = process.env.PORT || 5000; //heroku runs star script in package.json file. The PORT variable in env is also for heroku
 
-app.listen(PORT, () => console.log(`server started at ${PORT}`));
+server.listen(PORT, () => console.log(`server started at ${PORT}`));

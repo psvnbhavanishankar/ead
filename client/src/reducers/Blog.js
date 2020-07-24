@@ -17,18 +17,21 @@ export default function (state = initialState, action) {
       return {
         ...state,
         Blog: action.payload,
+        loading: false,
       };
 
     case DELETE_BLOG:
       return {
         ...state,
         Blog: state.Blog.filter((Blog) => Blog.title !== action.payload),
+        loading: false,
       };
 
     case ADD_BLOG:
       return {
         ...state,
         Blog: [...state.Blog, action.payload],
+        loading: false,
       };
     case BLOG_ERROR:
       return {

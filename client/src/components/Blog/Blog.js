@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import { getBlog, deleteBlog } from '../../actions/Blog';
+import Spinner from '../layout/Spinner';
 import Navbar from '../layout/Navbar3';
 import './options1.css';
 export class Blog extends Component {
@@ -20,7 +21,7 @@ export class Blog extends Component {
   }
 
   render() {
-    return (
+    return !this.props.Blog.loading && this.props.Blog.Blog ? (
       <Fragment>
         <Navbar />
         <div className='back10'>
@@ -34,7 +35,7 @@ export class Blog extends Component {
                   </span>
                 </center>
                 <br />
-                {this.props.Blog.map((Blog) => (
+                {this.props.Blog.Blog.map((Blog) => (
                   <div
                     className='card'
                     key={Blog.id}
@@ -42,8 +43,22 @@ export class Blog extends Component {
                   >
                     <div className='card-header'>
                       <div className='row'>
-                        <div className='col-11'>{Blog.title}</div>
-                        <div className='col-11'>{Blog.timestamp}</div>
+                        <div
+                          className='col-11'
+                          style={{
+                            color: '#664d34',
+                            textDecoration: 'inherit',
+                            fontWeight: 'bold',
+                            fontSize: '20px',
+                          }}
+                        >
+                          {Blog.title}
+                        </div>
+                        <div className='col-11'>
+                          {' '}
+                          {Blog.timestamp.substring(0, 10)},{' '}
+                          {Blog.timestamp.substring(12, 16)}
+                        </div>
                         <div className='col-1'>
                           <button
                             onClick={this.props.deleteBlog.bind(
@@ -58,8 +73,16 @@ export class Blog extends Component {
                       </div>
                     </div>
                     {/* {Blog.id} */}
-                    <div className='card-body'>
-                      {Blog.content}
+                    <div
+                      className='card-body'
+                      style={{
+                        color: 'black',
+                        textDecoration: 'inherit',
+                        fontWeight: 'bold',
+                        fontSize: '18px',
+                      }}
+                    >
+                      &nbsp;&nbsp;&nbsp; {Blog.content}
                       {/* {Blog.timestamp} */}
                     </div>
                   </div>
@@ -70,12 +93,14 @@ export class Blog extends Component {
           <br />
         </div>
       </Fragment>
+    ) : (
+      <Spinner />
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  Blog: state.Blog.Blog,
+  Blog: state.Blog,
   auth: state.auth,
 });
 

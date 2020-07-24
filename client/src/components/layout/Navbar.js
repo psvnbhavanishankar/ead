@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
+import logo from '../../img/logo.png';
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
@@ -64,6 +65,38 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
       <li>
         <button class='btn '>
           <Link
+            to='/select_profiles'
+            className='navtitles'
+            style={{
+              color: 'inherit',
+              textDecoration: 'inherit',
+              fontWeight: 'bold',
+            }}
+          >
+            Compare Profiles
+          </Link>
+        </button>
+      </li>
+
+      <li>
+        <button class='btn '>
+          <Link
+            to='/search'
+            className='navtitles'
+            style={{
+              color: 'inherit',
+              textDecoration: 'inherit',
+              fontWeight: 'bold',
+            }}
+          >
+            Search
+          </Link>
+        </button>
+      </li>
+
+      <li>
+        <button class='btn '>
+          <Link
             to='/clientprofile'
             className='navtitles'
             style={{
@@ -101,17 +134,32 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         <a href='#!'>Developers</a>
       </li> */}
       <li>
-        <Link to='/register' className='navtitles'>
+        <Link
+          to='/register'
+          className='navtitles'
+          onMouseOver="this.style.color='black'"
+          onMouseOut="this.style.color='white'"
+        >
           REGISTER
         </Link>
       </li>
       <li>
-        <Link to='/verify' className='navtitles'>
+        <Link
+          to='/verify'
+          className='navtitles'
+          onMouseOver="this.style.color='black'"
+          onMouseOut="this.style.color='white'"
+        >
           LAWYER-REG
         </Link>
       </li>
       <li>
-        <Link to='/login' className='navtitles'>
+        <Link
+          to='/login'
+          className='navtitles'
+          onMouseOver="this.style.color='black'"
+          onMouseOut="this.style.color='white'"
+        >
           LOGIN
         </Link>
       </li>
@@ -121,9 +169,8 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   return (
     <nav className='navbar'>
       <h1>
-        <Link to='/'>
-          <i class='fa fa-balance-scale' aria-hidden='true'></i>{' '}
-          <span className='title1'>DeJure</span>
+        <Link to='/dashboard'>
+          <img src={logo}></img>
         </Link>
       </h1>
       {!loading && (

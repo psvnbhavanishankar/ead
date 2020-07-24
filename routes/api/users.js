@@ -22,8 +22,8 @@ var smtpTransport = nodemailer.createTransport({
   service: 'Gmail',
   auth: {
     user: 'onlineplatformforlegalservices@gmail.com',
-    pass: 'yuvraj12'
-  }
+    pass: 'yuvraj12',
+  },
 });
 
 // @route POST api/users
@@ -37,16 +37,16 @@ router.get('/confirmation/:id', async (req, res) => {
     console.log(req.body);
     console.log(id);
 
-    Token.findOne({ token: id }, function(err, token) {
+    Token.findOne({ token: id }, function (err, token) {
       if (!token)
         return res.status(400).send({
           type: 'not-verified',
           msg:
-            'We were unable to find a valid token. Your token my have expired.'
+            'We were unable to find a valid token. Your token my have expired.',
         });
 
       // If we found a token, find a matching user
-      User.findOne({ _id: token._userId }, function(err, user) {
+      User.findOne({ _id: token._userId }, async function (err, user) {
         if (!user)
           return res
             .status(400)
@@ -54,16 +54,22 @@ router.get('/confirmation/:id', async (req, res) => {
         if (user.isVerified)
           return res.status(400).send({
             type: 'already-verified',
-            msg: 'This user has already been verified.'
+            msg: 'This user has already been verified.',
           });
+
+        // let lp = new ClientProfile({
+        //   user: user._id,
+        // });
+        // await lp.save();
 
         // Verify and save the user
         user.isVerified = true;
-        user.save(function(err) {
+        user.save(function (err) {
           if (err) {
             return res.status(500).send({ msg: err.message });
           }
-          res.status(200).send('The account has been verified. Please log in.');
+          // res.status(200).send('The account has been verified. Please log in.');
+          res.redirect('http://localhost:3000/login');
         });
       });
     });
@@ -86,14 +92,12 @@ router.get('/confirmation/:id', async (req, res) => {
 router.post(
   '/sendmail',
   [
-    check('name', 'Name is required')
-      .not()
-      .isEmpty(),
+    check('name', 'Name is required').not().isEmpty(),
     check('email', 'Please include a valid email address').isEmail(),
     check(
       'password',
       'Please enter a pasword with 8 or more characters'
-    ).isLength({ min: 8 })
+    ).isLength({ min: 8 }),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -114,7 +118,7 @@ router.post(
       user = new User({
         name,
         email,
-        password
+        password,
       });
 
       const salt = await bcrypt.genSalt(10);
@@ -128,14 +132,14 @@ router.post(
 
       const payload = {
         user: {
-          id: user.id
-        }
+          id: user.id,
+        },
       };
       var token = new Token({
         _userId: user._id,
-        token: crypto.randomBytes(16).toString('hex')
+        token: crypto.randomBytes(16).toString('hex'),
       });
-      token.save(function(err) {
+      token.save(function (err) {
         if (err) {
           return res.status(500).send({ msg: err.message });
         }
@@ -154,14 +158,14 @@ router.post(
           req.headers.host +
           '/api/users/confirmation/' +
           token.token +
-          '.\n'
+          '\n',
       };
-      smtpTransport.sendMail(mailOptions, function(err) {
+      smtpTransport.sendMail(mailOptions, function (err) {
         if (err) {
           return res.status(500).send({ msg: err.message });
         }
         res.status(200).json({
-          msg: 'A verification email has been sent to ' + user.email + '.'
+          msg: 'A verification email has been sent to ' + user.email + '.',
         });
       });
     } catch (err) {
@@ -177,16 +181,16 @@ router.get('/confirmation_lawyer/:id', async (req, res) => {
   try {
     console.log(req.body);
 
-    Token_Lawyer.findOne({ token: id }, function(err, token) {
+    Token_Lawyer.findOne({ token: id }, function (err, token) {
       if (!token)
         return res.status(400).send({
           type: 'not-verified',
           msg:
-            'We were unable to find a valid token. Your token my have expired.'
+            'We were unable to find a valid token. Your token my have expired.',
         });
 
       // If we found a token, find a matching user
-      Lawyer.findOne({ _id: token._userId }, function(err, user) {
+      Lawyer.findOne({ _id: token._userId }, async function (err, user) {
         if (!user)
           return res
             .status(400)
@@ -194,16 +198,20 @@ router.get('/confirmation_lawyer/:id', async (req, res) => {
         if (user.isVerified)
           return res.status(400).send({
             type: 'already-verified',
-            msg: 'This user has already been verified.'
+            msg: 'This user has already been verified.',
           });
-
+        // let lp = new LawyerProfile({
+        //   user: user._id,
+        // });
+        // await lp.save();
         // Verify and save the user
         user.isVerified = true;
-        user.save(function(err) {
+        user.save(function (err) {
           if (err) {
             return res.status(500).send({ msg: err.message });
           }
-          res.status(200).send('The account has been verified. Please log in.');
+          // res.status(200).send('The account has been verified. Please log in.');
+          res.redirect('http://localhost:3000/login');
         });
       });
     });
@@ -226,14 +234,12 @@ router.get('/confirmation_lawyer/:id', async (req, res) => {
 router.post(
   '/lawyer_sendmail',
   [
-    check('name', 'Name is required')
-      .not()
-      .isEmpty(),
+    check('name', 'Name is required').not().isEmpty(),
     check('email', 'Please include a valid email address').isEmail(),
     check(
       'password',
       'Please enter a pasword with 8 or more characters'
-    ).isLength({ min: 8 })
+    ).isLength({ min: 8 }),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -255,7 +261,7 @@ router.post(
         email,
         password,
         state,
-        enrollmentno
+        enrollmentno,
       });
 
       const salt = await bcrypt.genSalt(10);
@@ -269,14 +275,14 @@ router.post(
 
       const payload = {
         user: {
-          id: user.id
-        }
+          id: user.id,
+        },
       };
       var token = new Token_Lawyer({
         _userId: user._id,
-        token: crypto.randomBytes(16).toString('hex')
+        token: crypto.randomBytes(16).toString('hex'),
       });
-      token.save(function(err) {
+      token.save(function (err) {
         if (err) {
           return res.status(500).send({ msg: err.message });
         }
@@ -294,9 +300,9 @@ router.post(
           req.headers.host +
           '/api/users/confirmation_lawyer/' +
           token.token +
-          '.\n'
+          '\n',
       };
-      smtpTransport.sendMail(mailOptions, function(err) {
+      smtpTransport.sendMail(mailOptions, function (err) {
         if (err) {
           return res.status(500).send({ msg: err.message });
         }
@@ -324,7 +330,7 @@ router.post('/check', async (req, res) => {
     var r = 0;
     fs.createReadStream(csvPath + '/' + state1 + '.csv')
       .pipe(csv())
-      .on('data', row => {
+      .on('data', (row) => {
         if (
           row.NAME_OF_ADVOCATE.toUpperCase()
             .replace('SHRI ', '')

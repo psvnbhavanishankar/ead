@@ -1,15 +1,12 @@
 .cuisine_bg1 {
   position: relative;
-  background: url('../../img/dashboard.jpg') no-repeat;
-  
-  
+  /* background: url('../../img/dashboard.jpg') no-repeat; */
+  background-color: #e6d9cc;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: 5000px 1500px;
   height: 1100px;
-  
-  
 }
 .rowtop {
   background-color: white;
@@ -27,9 +24,8 @@ a:hover {
 }
 
 .cuisinerow2col1cont1 {
-  
-  background-color:white;
-  width:100%;
+  background-color: white;
+  width: 100%;
   border: 1px solid black;
   border-radius: 4px;
   padding: 5px;
@@ -38,9 +34,8 @@ a:hover {
 }
 .cuisinerow2col1cont1:hover {
   transition: 0.2s;
-  box-shadow: 5px 5px 5px black;;
-  border: 1px solid black;
-
+  /* box-shadow: 5px 5px 5px #e6d9cc; */
+  /* border: 1px solid black; */
 }
 a {
   color: black;
@@ -53,12 +48,11 @@ a {
   position: absolute;
   top: 20%;
   left: 20%;
-  
-  width:60%;
+
+  width: 60%;
   height: 120%;
-  background-color: #f5d6c6;
+  background-color: #313131;
   opacity: 0.9;
-  
 }
 .small_logo {
   alt: 'Logo-01';
@@ -155,6 +149,7 @@ a {
   text-align: center;
   font-family: 'Rokkitt';
   font-size: 3rem;
+  color: white;
 }
 .futuraa {
   color: #c89a69;

@@ -6,22 +6,23 @@ import { getFields, postFields } from '../../actions/fields';
 import { getLawyerbyField } from '../../actions/profile';
 import { setAlert } from '../../actions/alert';
 import { createMessage } from '../../actions/messages';
+import Spinner from '../layout/Spinner';
 import Navbar from '../layout/Navbar';
 import './options.css';
-import personalinjury from '../../img/practice-3.jpg';
-import familylaw from '../../img/practice-4.jpg';
-import employmentlaw from '../../img/practice-6.jpg';
-import bankandfinancial from '../../img/practice-2.jpg';
-import capitalmarket from '../../img/practice-5.jpg';
-import accidents from '../../img/practice-1.jpg';
-import disputeresolution from '../../img/practice-8.jpg';
-import corporate from '../../img/practice-7.jpg';
+import personalinjury from '../../img/practice-3.png';
+import familylaw from '../../img/practice-4.png';
+import employmentlaw from '../../img/practice-6.png';
+import bankandfinancial from '../../img/practice-2.png';
+import capitalmarket from '../../img/practice-5.png';
+import accidents from '../../img/practice-1.png';
+import disputeresolution from '../../img/practice-8.png';
+import corporate from '../../img/practice-7.png';
 
 const Dashboard = ({
   getFields,
   getLawyerbyField,
   auth,
-  fields: { fields, post_fields },
+  fields: { fields, post_fields, loading },
   onSubmit,
 }) => {
   useEffect(() => {
@@ -41,7 +42,7 @@ const Dashboard = ({
     corporate,
   ];
 
-  return (
+  return !loading && fields && fields.fields ? (
     <Fragment>
       <Navbar />
       {
@@ -52,8 +53,7 @@ const Dashboard = ({
             <div className='container'>
               <div>
                 <span class='cuisineheadfutura1'>
-                  Select the
-                  <span class='futuraa'> field </span>of the case
+                  Select the field of the case
                 </span>
                 <hr class='cuisinehr1' />
               </div>
@@ -83,6 +83,12 @@ const Dashboard = ({
                                 <div className='col-lg-12'>
                                   <div class='cuisinekarla'>
                                     <p
+                                      style={{
+                                        color: '#664d34',
+                                        textAlign: 'center',
+                                        fontSize: '25px',
+                                        fontFamily: 'Rokkitt',
+                                      }}
                                       onClick={getLawyerbyField.bind(
                                         this,
                                         field.name
@@ -132,6 +138,8 @@ const Dashboard = ({
         </Fragment>
       }
     </Fragment>
+  ) : (
+    <Spinner />
   );
 };
 

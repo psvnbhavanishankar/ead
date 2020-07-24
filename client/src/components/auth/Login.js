@@ -13,26 +13,27 @@ const Login = ({
   type,
   email_sent,
   createMessage,
-  loading
+  loading,
 }) => {
   const [formData, setFormData] = useState({
     email: '',
-    password: ''
+    password: '',
   });
 
   useEffect(() => {
     if (email_sent) {
       createMessage({
-        email_sent: 'A verification email has already been sent. Please verify.'
+        email_sent:
+          'A verification email has already been sent. Please verify.',
       });
     }
   }, [loading]);
 
   const { email, password } = formData;
 
-  const onChange = e =>
+  const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  const onSubmit = async e => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     login(email, password);
   };
@@ -48,7 +49,7 @@ const Login = ({
 
   return (
     <Fragment>
-      {/* <Navbar /> */}
+      <Navbar />
       <div className='login_bg'>
         <div className='login_form_div1'>
           <div>
@@ -59,14 +60,14 @@ const Login = ({
           </div>
           <br />
           <div>
-            <form onSubmit={e => onSubmit(e)}>
+            <form onSubmit={(e) => onSubmit(e)}>
               <input
                 className='log_text'
                 type='email'
                 placeholder='Email Address'
                 name='email'
                 value={email}
-                onChange={e => onChange(e)}
+                onChange={(e) => onChange(e)}
                 required
               />
               <input
@@ -76,7 +77,7 @@ const Login = ({
                 name='password'
                 minLength='6'
                 value={password}
-                onChange={e => onChange(e)}
+                onChange={(e) => onChange(e)}
               />
               <br />
               <input className='log_btn' type='submit' value='LOGIN' />
@@ -98,13 +99,13 @@ Login.propTypes = {
   login: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
   email_sent: PropTypes.bool,
-  createMessage: PropTypes.func.isRequired
+  createMessage: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
   email_sent: state.auth.email_sent,
-  type: state.auth.type
+  type: state.auth.type,
 });
 
 export default connect(mapStateToProps, { login, createMessage })(Login);

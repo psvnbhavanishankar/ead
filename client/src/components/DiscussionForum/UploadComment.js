@@ -49,21 +49,20 @@ export class UploadComment extends Component {
             <div className='card3'>
               <div className='card-header'>
                 <div className='row' style={{ textAlign: 'center' }}>
-                  <h4 className='col-12'>
+                  <h4 className='col-12' style={{ fontSize: '30px' }}>
                     UPLOAD COMMENT&nbsp;
                     <i className='fa fa-pen-alt' />
                   </h4>
                 </div>
               </div>
-              <br />
+
               <div className='card-body'>
                 <form onSubmit={this.onSubmit}>
-                  <br />
                   <div className='row'>
                     <label
                       className='col-12'
                       id='ut'
-                      style={{ textAlign: 'center' }}
+                      style={{ textAlign: 'left', fontSize: '20px' }}
                     >
                       CONTENT :
                     </label>
@@ -77,7 +76,7 @@ export class UploadComment extends Component {
                     />
                   </div>
                   <br />
-                  <br />
+
                   <div className='row2' style={{ paddingLeft: '20%' }}>
                     <button className='log_btn7' type='submit'>
                       Upload Comment

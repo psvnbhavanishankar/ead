@@ -5,20 +5,20 @@ import { setAlert } from '../../actions/alert';
 import { verify } from '../../actions/auth';
 import PropTypes from 'prop-types';
 import './register.css';
-// import Navbar from '../layout/Navbar';
+import Navbar from '../layout/Navbar';
 
 const Lawyer_Verify = ({ setAlert, verify, isVerified }) => {
   const [formData, setFormData] = useState({
     enrollmentno: '',
     name: '',
-    state: ''
+    state: '',
   });
 
   const { enrollmentno, name, state } = formData;
 
-  const onChange = e =>
+  const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  const onSubmit = async e => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     verify({ enrollmentno, name, state });
@@ -29,25 +29,25 @@ const Lawyer_Verify = ({ setAlert, verify, isVerified }) => {
   }
   return (
     <Fragment>
-      {/* <Navbar /> */}
+      <Navbar />
       <div className='register_bg2'>
-        <div className='reg_form_div'>
+        <div className='reg_form_div2'>
           <div>
             <span className='futura'>
               Lawyer Verifi<span className='futuraa'>cation</span>
             </span>
             <hr className='reg_hr' />
           </div>
-          <br />
+
           <div>
-            <form onSubmit={e => onSubmit(e)}>
+            <form onSubmit={(e) => onSubmit(e)}>
               <input
                 className='reg_text'
                 type='text'
                 placeholder='Name'
                 name='name'
                 value={name}
-                onChange={e => onChange(e)}
+                onChange={(e) => onChange(e)}
               />
               <input
                 className='reg_text'
@@ -55,14 +55,14 @@ const Lawyer_Verify = ({ setAlert, verify, isVerified }) => {
                 placeholder='Enrollment Number'
                 name='enrollmentno'
                 value={enrollmentno}
-                onChange={e => onChange(e)}
+                onChange={(e) => onChange(e)}
               />{' '}
               <br />
               <select
                 className='form-control col-10'
                 id='optionclass'
                 name='state'
-                onChange={e => onChange(e)}
+                onChange={(e) => onChange(e)}
                 value={state}
               >
                 <option value='' selected disbled hidden>
@@ -79,6 +79,7 @@ const Lawyer_Verify = ({ setAlert, verify, isVerified }) => {
               <br /> <br />
               <input className='reg_btn' type='submit' value='Verify' />
               <br /> <br />
+              <br />
             </form>
           </div>
         </div>
@@ -90,11 +91,11 @@ const Lawyer_Verify = ({ setAlert, verify, isVerified }) => {
 Lawyer_Verify.propTypes = {
   setAlert: PropTypes.func.isRequired,
   verify: PropTypes.func.isRequired,
-  isVerified: PropTypes.bool
+  isVerified: PropTypes.bool,
 };
 
-const mapStateToProps = state => ({
-  isVerified: state.verify.isVerified
+const mapStateToProps = (state) => ({
+  isVerified: state.verify.isVerified,
 });
 
 export default connect(mapStateToProps, { setAlert, verify })(Lawyer_Verify);

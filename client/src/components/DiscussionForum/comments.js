@@ -41,22 +41,51 @@ export class Comments extends Component {
                     style={{ backgroundColor: '#fff', color: 'black' }}
                   >
                     <div className='row'>
-                      <div className='col-6'>{this.props.posts.post.title}</div>
-                      &nbsp;&nbsp;&nbsp;&nbsp; By{' '}
-                      <div className='col-2'>
-                        {this.props.posts.post.author &&
-                        this.props.posts.post.author.name
-                          ? this.props.posts.post.author.name
-                          : ''}
+                      <div
+                        className='col-6'
+                        style={{
+                          color: '#664d34',
+                          textDecoration: 'inherit',
+                          fontWeight: 'bold',
+                          fontSize: '20px',
+                        }}
+                      >
+                        | {this.props.posts.post.title}
                       </div>
-                      at{' '}
-                      <div className='col-4'>
-                        {this.props.posts.post.createdAt}
+                      &nbsp;&nbsp;&nbsp;&nbsp;
+                      <div
+                        className='col-4'
+                        style={{
+                          textAlign: 'right',
+                          position: 'relative',
+                          left: '120px',
+                          fontSize: '18px',
+                          fontWeight: 'bold',
+                        }}
+                      >
+                        {this.props.posts.post.createdAt.substring(0, 10)},{' '}
+                        {this.props.posts.post.createdAt.substring(12, 16)}
                       </div>
                     </div>
-                  </div>
 
-                  <div className='card-body'>
+                    <div className='col-4'>
+                      &nbsp; By{' '}
+                      {this.props.posts.post.author &&
+                      this.props.posts.post.author.name
+                        ? this.props.posts.post.author.name
+                        : ''}
+                    </div>
+                  </div>
+                  <div
+                    className='card-body'
+                    style={{
+                      color: 'black',
+                      textDecoration: 'inherit',
+                      fontWeight: 'bold',
+                      fontSize: '18px',
+                    }}
+                  >
+                    &nbsp; &nbsp; &nbsp;
                     {this.props.posts.post.content}
                   </div>
                 </div>
@@ -68,13 +97,16 @@ export class Comments extends Component {
           <div className='container'>
             <div className='container3'>
               <center>
+                <br />
                 <Link push to='/upload_comment'>
                   <button class='log_btn20'>Upload a comment</button>
                 </Link>
                 <br />
+                <br />
                 <span className='futura'>
                   <span className='futuraa'>Comments</span>
                 </span>
+                <br />
               </center>
               {this.props.comments && this.props.comments.comments
                 ? this.props.comments.comments.map((comment) => (
@@ -85,14 +117,39 @@ export class Comments extends Component {
                     >
                       <div className='card-header' style={{ color: 'black' }}>
                         <div className='row'>
-                          <div className='col-6'>{comment.content}</div>
-                          &nbsp;&nbsp;&nbsp;&nbsp; By{' '}
-                          <div className='col-2'>
+                          <div
+                            className='col-6'
+                            style={{
+                              color: 'black',
+                              textDecoration: 'inherit',
+                              fontWeight: 'bold',
+                              fontSize: '18px',
+                            }}
+                          >
+                            {comment.content}
+                          </div>
+
+                          <div
+                            className='col-4'
+                            style={{
+                              textAlign: 'right',
+                              position: 'relative',
+                              left: '150px',
+                              fontSize: '18px',
+                              fontWeight: 'bold',
+                            }}
+                          >
+                            {' '}
+                            {comment.timestamp.substring(0, 10)},{' '}
+                            {comment.timestamp.substring(12, 16)}
+                          </div>
+                          <br />
+                          <div className='col-4'>
+                            By{' '}
                             {comment.author && comment.author.name
                               ? comment.author.name
                               : ''}
                           </div>
-                          at <div className='col-4'>{comment.timestamp}</div>
                         </div>
                       </div>
 

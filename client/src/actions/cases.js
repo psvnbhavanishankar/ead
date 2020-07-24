@@ -28,6 +28,22 @@ export const getMyCases = () => async (dispatch) => {
   }
 };
 
+export const getMyCasesasClient = () => async (dispatch) => {
+  try {
+    const res = await axios.get('/api/cases/mycasesasclient');
+
+    dispatch({
+      type: GET_MY_CASES,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: CASES_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
 export const getClientCases = (id) => async (dispatch) => {
   try {
     const res = await axios.get(`/api/cases/clientcases/${id}`);
@@ -85,7 +101,7 @@ export const postCase = (formData) => async (dispatch) => {
       },
     };
 
-    const res = await axios.post('/api/cases', formData, config);
+    const res = await axios.post('/api/cases/', formData, config);
     // dispatch(setAlert('Profile Updated', 'success'));
 
     dispatch({

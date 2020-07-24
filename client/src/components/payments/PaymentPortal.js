@@ -85,7 +85,7 @@ export class PaymentPortal extends React.Component {
     } = this.state;
 
     if (payment === 1) {
-      return <Redirect to='/dashboard' />;
+      return <Redirect push to='/newcase' />;
     }
 
     return (
@@ -166,9 +166,13 @@ export class PaymentPortal extends React.Component {
                   <div className='form-actions'>
                     <button className='log_btn5'>PAY</button>
                   </div>
-                  <br />
-                  <button className='log_btn5 '>CANCEL</button>
                 </form>
+                <br />
+                <Link to='/dashboard'>
+                  <p id='payment_form' className='log_btn1989'>
+                    CANCEL
+                  </p>
+                </Link>
                 {formData && (
                   <div className='App-highlight'>
                     {formatFormData(formData).map((d, i) => (

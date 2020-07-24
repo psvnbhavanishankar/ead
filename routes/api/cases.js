@@ -3,12 +3,12 @@ const router = express.Router();
 const auth = require('../../middleware/auth');
 const Case = require('../../models/Case');
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
   try {
     if (req.body.payment_status) {
       var data = req.body;
       const case1 = new Case({
-        client: data.client,
+        client: req.user.id,
         lawyer: data.lawyer,
         title: data.title,
         description: data.description,
@@ -38,6 +38,26 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/mycasesasclient', auth, async (req, res) => {
+  try {
+    const case1 = await Case.find({ client: req.user.id })
+      .populate('client', ['_id', 'name', 'email'])
+      .populate('lawyer', ['_id', 'name', 'email', 'enrollmentno', 'state']);
+
+    if (case1.length > 0) res.json(case1);
+    else {
+      const case2 = await Case.find({ client: req.user.id })
+        .populate('client', ['_id', 'name', 'email'])
+        .populate('lawyer', ['_id', 'name', 'email', 'enrollmentno', 'state']);
+      if (case2.length > 0) res.json(case2);
+      else res.send([]);
+    }
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 router.get('/mycases', auth, async (req, res) => {
   try {
     const case1 = await Case.find({ lawyer: req.user.id })
@@ -50,7 +70,7 @@ router.get('/mycases', auth, async (req, res) => {
         .populate('client', ['_id', 'name', 'email'])
         .populate('lawyer', ['_id', 'name', 'email', 'enrollmentno', 'state']);
       if (case2.length > 0) res.json(case2);
-      else res.send('No cases');
+      else res.send([]);
     }
   } catch (err) {
     console.log(err.message);

@@ -100,13 +100,28 @@ router.post(
 
 router.post('/update', auth, async (req, res) => {
   try {
-    const update = {
-      address: {
-        locality: req.body.locality,
-        city: req.body.city,
-        pincode: req.body.pincode,
-      },
-    };
+    var image = req.body.image_content;
+    var update;
+    // console.log(req.body.image_content);
+    if (image !== '') {
+      update = {
+        address: {
+          locality: req.body.locality,
+          city: req.body.city,
+          pincode: req.body.pincode,
+        },
+        image: image,
+      };
+    } else {
+      update = {
+        address: {
+          locality: req.body.locality,
+          city: req.body.city,
+          pincode: req.body.pincode,
+        },
+      };
+    }
+
     let profile = await Profile.findOneAndUpdate(
       { user: req.user.id },
       update,
@@ -114,7 +129,7 @@ router.post('/update', auth, async (req, res) => {
         new: true,
       }
     );
-    await profile.save();
+
     res.json(profile);
   } catch (err) {
     console.error(err.message);
@@ -123,16 +138,35 @@ router.post('/update', auth, async (req, res) => {
 });
 router.post('/lawyerupdate', auth, async (req, res) => {
   try {
-    const update = {
-      address: {
-        locality: req.body.locality,
-        city: req.body.city,
-        pincode: req.body.pincode,
-      },
-      licensed_year: req.body.licensed_year,
-      experience: req.body.experience,
-      price: req.body.price,
-    };
+    var image;
+    var update;
+    if (req.body.image_content !== '') {
+      image = req.body.image;
+      update = {
+        address: {
+          locality: req.body.locality,
+          city: req.body.city,
+          pincode: req.body.pincode,
+        },
+        licensed_year: req.body.licensed_year,
+        experience: req.body.experience,
+        price: req.body.price,
+        mobile: req.body.mobile,
+        image: image,
+      };
+    } else {
+      update = {
+        address: {
+          locality: req.body.locality,
+          city: req.body.city,
+          pincode: req.body.pincode,
+        },
+        licensed_year: req.body.licensed_year,
+        experience: req.body.experience,
+        price: req.body.price,
+        mobile: req.body.mobile,
+      };
+    }
     let profile = await LawyerProfile.findOneAndUpdate(
       { user: req.user.id },
       update,
@@ -140,7 +174,7 @@ router.post('/lawyerupdate', auth, async (req, res) => {
         new: true,
       }
     );
-    await profile.save();
+
     res.json(profile);
   } catch (err) {
     console.error(err.message);
@@ -153,8 +187,44 @@ router.post('/field', async (req, res) => {
     let users = await LawyerProfile.find({
       practice_areas: req.body.field,
     }).populate('user', ['_id', 'name', 'avatar', 'email']);
-    console.log(users);
+    // console.log(users);
     res.json(users);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ msg: 'server error' });
+  }
+});
+
+router.post('/endorse', auth, async (req, res) => {
+  try {
+    const name = req.body.name;
+    console.log(1);
+    console.log(req.user.id);
+    const profile_1 = await LawyerProfile.findOne({ user: req.user.id });
+    // console.log(profile_1);
+    const profile = await LawyerProfile.updateOne(
+      { user: req.user.id },
+      { $addToSet: { endorsments_given: name } }
+    );
+    // console.log(profile);
+    if (!profile) {
+      return res
+        .status(400)
+        .json({ msg: 'profile does not exist for this user' });
+    }
+    // res.send(profile);
+    const user_endorse = await Lawyer.findOne({ name: name });
+    const user = await Lawyer.findOne({ _id: req.user.id });
+    const profile_endorse = await LawyerProfile.updateOne(
+      { user: user_endorse },
+      { $addToSet: { endorsments_got: user.name } }
+    );
+    if (!profile_endorse) {
+      return res
+        .status(400)
+        .json({ msg: 'profile does not exist for this user' });
+    }
+    res.send(profile_endorse);
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ msg: 'server error' });
@@ -271,8 +341,48 @@ router.get('/lawyer/:lawyer_id', auth, async (req, res) => {
   }
 });
 
+router.post('/lawyer/compare', auth, async (req, res) => {
+  try {
+    const profile1 = await LawyerProfile.findById(
+      req.body.array[0]
+    ).populate('user', ['_id', 'name', 'email', 'enrollmentno', 'state']);
+    const profile2 = await LawyerProfile.findById(
+      req.body.array[1]
+    ).populate('user', ['_id', 'name', 'email', 'enrollmentno', 'state']);
+    if (!profile1) {
+      res.status(400).json({ msg: 'profile1 not found' });
+    }
+    if (!profile2) {
+      res.status(400).json({ msg: 'profile2 not found' });
+    }
+
+    res.send([profile1, profile2]);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind == 'ObjectId') {
+      res.status(400).json({ msg: 'profile not found' });
+    }
+    res.status(500).json({ msg: 'server error' });
+  }
+});
 // //@route GET all profiles api/profile
 // //@access public
+
+router.get('/lawyers', async (req, res) => {
+  try {
+    const profiles = await LawyerProfile.find().populate('user', [
+      '_id',
+      'name',
+      'email',
+      'enrollmentno',
+      'state',
+    ]);
+    res.json(profiles);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ msg: 'server error' });
+  }
+});
 
 router.get('/', async (req, res) => {
   try {
@@ -307,7 +417,7 @@ router.delete('/', auth, async (req, res) => {
 
 router.post('/fields', auth, async (req, res) => {
   try {
-    console.log(req);
+    // console.log(req);
     const update = {
       practice_areas: req.body.fields,
     };

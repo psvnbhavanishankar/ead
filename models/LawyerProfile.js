@@ -34,6 +34,25 @@ const LawyerProfileSchema = mongoose.Schema({
     type: Number,
   },
 
+  image: {
+    type: String,
+  },
+
+  mobile: {
+    type: String,
+  },
+
+  endorsments_given: [
+    {
+      type: String,
+    },
+  ],
+
+  endorsments_got: [
+    {
+      type: String,
+    },
+  ],
   price: {
     type: Number,
   },

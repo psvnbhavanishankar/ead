@@ -21,6 +21,8 @@ import PaymentPortal from './components/payments/PaymentPortal';
 import Oauth from './components/auth/test_oauth';
 import Alerts from './components/layout/Alerts';
 import Mycases from './components/case/Mycases';
+import MyCasesClient from './components/case/MyCasesClient';
+import newCase from './components/case/newCase';
 import Posts from './components/DiscussionForum/posts';
 import Comments from './components/DiscussionForum/comments';
 import UploadPost from './components/DiscussionForum/UploadPost';
@@ -28,6 +30,16 @@ import UploadComment from './components/DiscussionForum/UploadComment';
 import AllBlogs from './components/AllBlogs/allblogs';
 import Blog_Dashboard from './components/Blog/Blog_Dashboard';
 import Blog from './components/Blog/Blog';
+import search from './components/search/search';
+import searchl from './components/search/searchl';
+import select_profiles from './components/compare_profile/select_profiles';
+import compare_profiles from './components/compare_profile/compare';
+import view_profile from './components/Profile/viewProfile';
+import view_lprofile from './components/Profile/viewLprofile';
+import Join from './components/Join/Join';
+import Join2 from './components/Join/Join2';
+import Chat from './components/chat/Chat';
+import Chat2 from './components/chat/Chat2';
 
 //Redux
 import { Provider } from 'react-redux';
@@ -76,11 +88,33 @@ const App = () => {
               <Route exact path='/dashboard2' component={Dashboard2} />
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
               <PrivateRoute exact path='/mycases' component={Mycases} />
+              <PrivateRoute exact path='/cases' component={MyCasesClient} />
+              <PrivateRoute exact path='/newcase' component={newCase} />
               <PrivateRoute exact path='/allblogs' component={AllBlogs} />
               <PrivateRoute exact path='/myblogs' component={Blog} />
               <PrivateRoute exact path='/posts' component={Posts} />
               <PrivateRoute exact path='/post' component={Comments} />
               <PrivateRoute exact path='/upload_post' component={UploadPost} />
+              <PrivateRoute
+                exact
+                path='/select_profiles'
+                component={select_profiles}
+              />
+              <PrivateRoute
+                exact
+                path='/view_profile'
+                component={view_profile}
+              />
+              <PrivateRoute
+                exact
+                path='/viewLprofile'
+                component={view_lprofile}
+              />
+              <PrivateRoute
+                exact
+                path='/compare_profiles'
+                component={compare_profiles}
+              />
               <PrivateRoute
                 exact
                 path='/upload_comment'
@@ -108,6 +142,12 @@ const App = () => {
               />
               <PrivateRoute exact path='/bloglist' component={Blog_Dashboard} />
               <PrivateRoute exact path='/pay' component={PaymentPortal} />
+              <PrivateRoute exact path='/search' component={search} />
+              <PrivateRoute exact path='/searchl' component={searchl} />
+              <PrivateRoute exact path='/join' component={Join} />
+              <PrivateRoute exact path='/join2' component={Join2} />
+              <PrivateRoute path='/chat' component={Chat} />
+              <PrivateRoute path='/chat2' component={Chat2} />
             </Switch>
           </Fragment>
         </Router>

@@ -38,7 +38,7 @@ export class Blog extends Component {
             <div className='card2'>
               <div className='card-header'>
                 <div className='row' style={{ textAlign: 'center' }}>
-                  <h4 className='col-12'>
+                  <h4 className='col-12' style={{ fontSize: '30px' }}>
                     WRITE BLOG&nbsp;
                     <i className='fa fa-pen-alt' />
                   </h4>
@@ -51,9 +51,9 @@ export class Blog extends Component {
                     <label
                       className='col-12'
                       id='ut'
-                      style={{ textAlign: 'center' }}
+                      style={{ textAlign: 'left' }}
                     >
-                      TITLE :
+                      Title :
                     </label>
                     <input
                       type='text'
@@ -69,9 +69,9 @@ export class Blog extends Component {
                     <label
                       className='col-12'
                       id='ut'
-                      style={{ textAlign: 'center' }}
+                      style={{ textAlign: 'left' }}
                     >
-                      CONTENT :
+                      Content :
                     </label>
                     <textarea
                       rows={10}

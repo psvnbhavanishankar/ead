@@ -51,7 +51,29 @@
 .reg_form_div {
   text-align: center;
   position: absolute;
-  top: 23%;
+  top: 21%;
+  left: 30%;
+  width: 40%;
+  background-color: #313131;
+  opacity: 0.9;
+  padding: 1%;
+}
+
+.reg_form_div2 {
+  text-align: center;
+  position: absolute;
+  top: 21%;
+  left: 30%;
+  width: 40%;
+  background-color: #313131;
+  opacity: 0.9;
+  padding: 1%;
+}
+
+.reg_form_div3 {
+  text-align: center;
+  position: absolute;
+  top: 21%;
   left: 30%;
   width: 40%;
   background-color: #313131;
@@ -72,7 +94,7 @@
   position: relative;
   background: url('../../img/authpic3.jpg') no-repeat;
   background-size: cover;
-  height: 130vh;
+  height: 100vh;
 }
 
 .register_bg2 {
@@ -86,5 +108,15 @@
   position: relative;
   background: url('../../img/authpic5.jpg') no-repeat;
   background-size: cover;
-  height: 160vh;
+  height: 100vh;
+}
+
+.reg_form_div {
+  max-height: 520px;
+  overflow-y: scroll;
+}
+
+.reg_form_div3 {
+  max-height: 520px;
+  overflow-y: scroll;
 }

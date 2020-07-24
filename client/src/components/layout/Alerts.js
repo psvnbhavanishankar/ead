@@ -32,6 +32,9 @@ export class Alerts extends Component {
       if (message.pincodeError) {
         alert.error(message.pincodeError);
       }
+      if (message.title_not_null) {
+        alert.error(message.title_not_null);
+      }
 
       if (message.wait) {
         alert.info(message.wait);
@@ -39,8 +42,17 @@ export class Alerts extends Component {
       if (message.bookmark) {
         alert.info(message.bookmark);
       }
-      if (message.Follow) {
-        alert.info(message.Follow);
+      if (message.fields_set) {
+        alert.success(message.fields_set);
+      }
+      if (message.new_case) {
+        alert.info(message.new_case);
+      }
+      if (message.mobile) {
+        alert.error(message.mobile);
+      }
+      if (message.profile) {
+        alert.success(message.profile);
       }
       if (message.titleRequired) {
         alert.info(message.titleRequired);
@@ -77,6 +89,9 @@ export class Alerts extends Component {
       }
       if (message.addToCart) {
         alert.info(message.addToCart);
+      }
+      if (message.profilesSelected_nottwo) {
+        alert.info(message.profilesSelected_nottwo);
       }
     }
   }

@@ -1,15 +1,17 @@
-import { GET_ALLBLOGS } from "../actions/types";
+import { GET_ALLBLOGS } from '../actions/types';
 
 const initialState = {
-  allblogs: []
+  allblogs: [],
+  loading: true,
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case GET_ALLBLOGS:
       return {
         ...state,
-        allblogs: action.payload
+        allblogs: action.payload,
+        loading: false,
       };
     default:
       return state;

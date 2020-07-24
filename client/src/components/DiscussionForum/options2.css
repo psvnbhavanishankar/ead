@@ -1,17 +1,35 @@
 .back1 {
   position: relative;
-  background: url('../../img/post.jpg') no-repeat;
+  background-color: #e6d9cc;
   background-size: cover;
-  height: 150vh;
+  height: 112vh;
 }
+
+.back232 {
+  position: relative;
+  background-color: #e6d9cc;
+  background-size: cover;
+  height: 140vh;
+}
+
 .container2 {
   text-align: center;
   /* float: right; */
   position: absolute;
   /* top: 10%; */
-  left: 20%;
-  width: 55%;
-  height: 90%;
+  left: 12%;
+  width: 65%;
+  height: 112vh;
+}
+
+.container911 {
+  text-align: center;
+  /* float: right; */
+  position: absolute;
+  /* top: 10%; */
+  left: 12%;
+  width: 65%;
+  height: 140vh;
 }
 
 .card3 {

@@ -2,18 +2,19 @@ import React, { useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Navbar from '../layout/Navbar3';
+import Spinner from '../layout/Spinner';
 import { getMyCases, getClientCases } from '../../actions/cases';
 import './posts.css';
 
 const Lawyer_Dashboard = ({
   getMyCases,
   auth: { user, isAuthenticated },
-  cases: { mycases },
+  cases: { mycases, loading },
 }) => {
   useEffect(() => {
     getMyCases();
   }, []);
-  return (
+  return !loading ? (
     <Fragment>
       <Navbar />
       <br />
@@ -28,46 +29,68 @@ const Lawyer_Dashboard = ({
               </span>
             </center>
 
-            {mycases
-              ? mycases.map((instance) => (
-                  <center>
-                    <div
-                      className='card'
-                      style={{
-                        margin: '50px',
-                        border: 'none',
-                      }}
-                    >
-                      <br />
-                      <div className='card-header'>
-                        <span className='jas'>Title : </span> {instance.title}
+            {mycases ? (
+              mycases.map((instance) => (
+                <center>
+                  <div
+                    className='card'
+                    style={{
+                      margin: '50px',
+                      border: 'none',
+                    }}
+                  >
+                    <br />
+                    <div className='card-header'>
+                      <span
+                        style={{
+                          color: '#664d34',
+                          textDecoration: 'inherit',
+                          fontWeight: 'bold',
+                          fontSize: '20px',
+                        }}
+                      >
+                        {instance.title}
+                      </span>
+                    </div>
+                    <div className='card-body'>
+                      <div className='dos'>
+                        {instance.description.map((desc) => (
+                          <p>{desc}</p>
+                        ))}
                       </div>
-                      <div className='card-body'>
-                        <div className='dos'>
-                          {instance.description.map((desc) => (
-                            <p>{desc}</p>
-                          ))}
-                        </div>
-                        <div className='dos'>
-                          <span className='jas'>Client : </span>
-                          {instance.client.name}
-                        </div>
-                        <div className='dos'>
+                      <div className='dos'>
+                        <span className='jas'>Client : </span>
+                        {instance.client.name}
+                      </div>
+                      {/* <div className='dos'>
                           <span className='jas'>Lawyer : </span>
                           {instance.lawyer.name}
-                        </div>
-                        <br />
-                      </div>
+                        </div> */}
+                      <br />
                     </div>
-                  </center>
-                ))
-              : ''}
+                  </div>
+                </center>
+              ))
+            ) : (
+              <p
+                style={{
+                  color: '#664d34',
+                  textDecoration: 'inherit',
+                  fontWeight: 'bold',
+                  fontSize: '20px',
+                }}
+              >
+                No cases
+              </p>
+            )}
             <br />
           </div>
         </div>
         <br />
       </div>
     </Fragment>
+  ) : (
+    <Spinner />
   );
 };
 
