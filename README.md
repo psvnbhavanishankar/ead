@@ -1,2 +1,2 @@
-# Online-Platform-for-Legal-Services
+# DeJure - Online-Platform-for-Legal-Services
 EAD Course Project
